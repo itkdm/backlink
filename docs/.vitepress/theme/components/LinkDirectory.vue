@@ -37,13 +37,15 @@ const text = computed(() => props.locale === 'zh'
       search: '搜索平台、产品类型或要求…', all: '全部平台', allFees: '全部费用',
       empty: '没有找到匹配的提交平台，换个关键词试试。', label: '产品提交平台', featured: '推荐入口',
       fee: '费用', dr: 'DR', drPending: '—',
-      introduction: '费用、审核、外链与收录状态可能变化，请以平台当前页面为准。'
+      introduction: '费用、审核、外链与收录状态可能变化，请以平台当前页面为准。',
+      note: '外链属性和收录状态仅在有可靠依据时记录；DR 不代表外链效果或排名保证。'
     }
   : {
       search: 'Search platforms, product types, or requirements…', all: 'All platforms', allFees: 'All fee types',
       empty: 'No matching submission platforms. Try another search.', label: 'Product submission platforms', featured: 'Featured',
       fee: 'Fee', dr: 'DR', drPending: '—',
-      introduction: 'Fees, review, backlink, and listing status may change. Check each platform’s current page.'
+      introduction: 'Fees, review, backlink, and listing status may change. Check each platform’s current page.',
+      note: 'Backlink attributes and indexability are recorded only when reliable evidence is available. DR does not guarantee link impact or rankings.'
     })
 
 const feeOptions = computed(() => Object.keys(feeLabels[locale.value]) as FeeModel[])

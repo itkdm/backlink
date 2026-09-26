@@ -11,6 +11,8 @@ Bujidao Backlink Directory collects platforms where you can submit SaaS, AI tool
 
 We prioritize official submission instructions, pricing pages, and help documents, and record when an entry was last checked. Fees, reciprocal-link requirements, backlink attributes, and indexability can change. Fields that cannot be confirmed are marked unknown. Domain Rating is shown only when its source can be traced.
 
+The directory covers product launch communities, software discovery directories, B2B software profiles, and AI-specific catalogs. We prioritize platforms with real product discovery use and verifiable official submission or profile-creation flows. Their audiences and eligibility rules differ, so a platform may not fit every product. There is no authoritative industry-wide “top ten backlink platforms” list; homepage picks are editorial selections, not a ranking.
+
 Each platform makes its own review and listing decisions. Directory information does not guarantee acceptance or SEO results; check the platform’s latest requirements before submitting.
 
 Popular picks on the homepage are editorial selections, not a live traffic ranking. Paid placements appear only when active campaigns exist and are labeled separately.

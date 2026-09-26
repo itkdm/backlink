@@ -6,8 +6,8 @@ const props = defineProps<{ id: string; locale: LinkLanguage }>()
 const locale = computed(() => props.locale)
 const link = computed(() => directoryLinks.find((item) => item.id === props.id))
 const copy = computed(() => props.locale === 'zh'
-  ? { back: '返回广场', submit: '前往提交', website: '访问官网', pricing: '查看定价', about: '平台简介', category: '分类', fee: '费用方式', feeNote: '费用说明', accepted: '接受的产品类型', requirements: '提交要求', review: '审核方式', editorial: '编辑审核', community: '社区审核 / 发布', automated: '自动审核', unknown: '未知', backlink: '外链属性', indexability: '列表页索引状态', indexable: '可索引', noindex: '不索引', status: '提交状态', open: '开放', paused: '暂停', verified: '信息核实日期', dr: 'Domain Rating', notFound: '没有找到这个平台。' }
-  : { back: 'Back to directory', submit: 'Submit a product', website: 'Visit website', pricing: 'View pricing', about: 'About', category: 'Category', fee: 'Fee model', feeNote: 'Fee details', accepted: 'Accepted product types', requirements: 'Requirements', review: 'Review method', editorial: 'Editorial review', community: 'Community review / launch', automated: 'Automated review', unknown: 'Unknown', backlink: 'Backlink attribute', indexability: 'Listing indexability', indexable: 'Indexable', noindex: 'Noindex', status: 'Submission status', open: 'Open', paused: 'Paused', verified: 'Last verified', dr: 'Domain Rating', notFound: 'Platform not found.' })
+  ? { back: '返回广场', submit: '前往提交', website: '访问官网', pricing: '查看定价', guidelines: '查看官方规则与说明', about: '平台简介', category: '分类', fee: '费用方式', feeNote: '费用说明', accepted: '接受的产品类型', requirements: '提交要求', review: '审核方式', editorial: '编辑审核', community: '社区审核 / 发布', automated: '自动审核', unknown: '未知', backlink: '外链属性', indexability: '列表页索引状态', indexable: '可索引', noindex: '不索引', status: '提交状态', open: '开放', paused: '暂停', verified: '信息核实日期', dr: 'Domain Rating', notFound: '没有找到这个平台。' }
+  : { back: 'Back to directory', submit: 'Submit a product', website: 'Visit website', pricing: 'View pricing', guidelines: 'Official rules and details', about: 'About', category: 'Category', fee: 'Fee model', feeNote: 'Fee details', accepted: 'Accepted product types', requirements: 'Requirements', review: 'Review method', editorial: 'Editorial review', community: 'Community review / launch', automated: 'Automated review', unknown: 'Unknown', backlink: 'Backlink attribute', indexability: 'Listing indexability', indexable: 'Indexable', noindex: 'Noindex', status: 'Submission status', open: 'Open', paused: 'Paused', verified: 'Last verified', dr: 'Domain Rating', notFound: 'Platform not found.' })
 
 const reviewLabel = computed(() => {
   if (!link.value) return copy.value.unknown
@@ -67,6 +67,7 @@ function favicon(homepageUrl: string, logoUrl?: string) {
         <div><dt>{{ copy.dr }}</dt><dd>{{ link.domainRating ? `${link.domainRating.value} · ${link.domainRating.source} · ${link.domainRating.checkedAt}` : copy.unknown }}</dd></div>
       </dl>
       <p class="site-detail-fee-note"><strong>{{ copy.feeNote }}:</strong> {{ link.feeSummary[locale] }}</p>
+      <p class="site-detail-source"><a :href="link.guidelinesUrl" target="_blank" rel="noopener noreferrer">{{ copy.guidelines }} ↗</a></p>
     </section>
 
     <section class="site-detail-section">
