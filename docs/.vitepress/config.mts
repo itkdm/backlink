@@ -6,7 +6,7 @@ const siteUrl = process.env.SITE_URL
 export default defineConfig({
   lang: 'zh-CN',
   title: '布吉岛外链导航',
-  description: '精选网站、独立产品、SEO 增长与开发工具，帮你更快找到值得访问的互联网资源。',
+  description: '查找可提交出海 SaaS、AI 工具和互联网产品的平台目录与发布社区。',
   cleanUrls: true,
   lastUpdated: true,
   head: [
@@ -21,14 +21,14 @@ export default defineConfig({
       label: '简体中文',
       lang: 'zh-CN',
       title: '布吉岛外链导航',
-      description: '精选网站、独立产品、SEO 增长与开发工具，帮你更快找到值得访问的互联网资源。',
+      description: '查找可提交出海 SaaS、AI 工具和互联网产品的平台目录与发布社区。',
       themeConfig: {
         siteTitle: '布吉岛外链导航',
         nav: [
-          { text: '资源导航', link: '/#directory' },
-          { text: 'SEO 与增长', link: '/#seo-growth' },
-          { text: 'AI 与开发', link: '/#ai-development' },
-          { text: '建站与产品', link: '/#web-products' },
+          { text: '提交平台', link: '/#directory' },
+          { text: 'SaaS 目录', link: '/#saas-directories' },
+          { text: 'AI 目录', link: '/#ai-directories' },
+          { text: '发布社区', link: '/#launch-platforms' },
           { text: '关于本站', link: '/about' }
         ],
         sidebar: {
@@ -47,14 +47,14 @@ export default defineConfig({
       label: 'English',
       lang: 'en-US',
       title: 'Bujidao Link Directory',
-      description: 'A curated directory of useful websites, independent products, growth resources, and developer tools.',
+      description: 'Find directories and launch communities where you can submit SaaS, AI tools, and internet products.',
       themeConfig: {
         siteTitle: 'Bujidao Links',
         nav: [
-          { text: 'Directory', link: '/en/#directory' },
-          { text: 'SEO & Growth', link: '/en/#seo-growth' },
-          { text: 'AI & Development', link: '/en/#ai-development' },
-          { text: 'Web & Products', link: '/en/#web-products' },
+          { text: 'Submission Sites', link: '/en/#directory' },
+          { text: 'SaaS Directories', link: '/en/#saas-directories' },
+          { text: 'AI Directories', link: '/en/#ai-directories' },
+          { text: 'Launch Communities', link: '/en/#launch-platforms' },
           { text: 'About', link: '/en/about' }
         ],
         sidebar: {

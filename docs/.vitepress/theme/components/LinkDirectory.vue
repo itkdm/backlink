@@ -37,26 +37,26 @@ onBeforeUnmount(() => {
 
 const text = computed(() => props.locale === 'zh'
   ? {
-      eyebrow: 'CURATED WEB DIRECTORY',
-      search: '搜索网站、工具或关键词…',
-      all: '全部资源',
-      results: (count: number) => `${count} 个精选网站`,
-      visit: '访问网站',
-      empty: '没有找到匹配的网站，换个关键词试试。',
-      label: '精选导航',
-      featured: '推荐',
-      note: '外部网站由各自团队运营，本站仅提供导航。'
+      eyebrow: 'PRODUCT SUBMISSION DIRECTORY',
+      search: '搜索提交平台或产品类型…',
+      all: '全部平台',
+      results: (count: number) => `${count} 个提交入口`,
+      visit: '前往提交',
+      empty: '没有找到匹配的提交平台，换个关键词试试。',
+      label: '产品提交平台',
+      featured: '推荐入口',
+      note: '平台的审核、费用、收录与外链属性以其当前规则为准。'
     }
   : {
-      eyebrow: 'CURATED WEB DIRECTORY',
-      search: 'Search sites, tools, or topics…',
-      all: 'All links',
-      results: (count: number) => `${count} curated websites`,
-      visit: 'Visit website',
-      empty: 'No matching websites. Try another search.',
-      label: 'Curated links',
+      eyebrow: 'PRODUCT SUBMISSION DIRECTORY',
+      search: 'Search submission sites or product types…',
+      all: 'All platforms',
+      results: (count: number) => `${count} submission pages`,
+      visit: 'Go to submission',
+      empty: 'No matching submission platforms. Try another search.',
+      label: 'Product submission platforms',
       featured: 'Featured',
-      note: 'External websites are operated by their respective teams. This site is an independent directory.'
+      note: 'Review, fees, acceptance, and backlink attributes are set by each platform and may change.'
     })
 
 const filteredLinks = computed(() => {

@@ -4,7 +4,7 @@
 
 ## 项目定位
 
-- 布吉岛外链导航：以中文为默认语言，提供英文版本，整理值得访问的网站、工具和产品资源。
+- 布吉岛外链导航：以中文为默认语言，提供英文版本，收录可提交出海 SaaS、AI 工具和互联网产品的平台与发布社区；不是普通工具导航。
 - 技术栈为 VitePress + Markdown + 少量 Vue 组件，由 pnpm 管理。保留 VitePress 架构。
 - 用户明确要求优先；不要擅自改变栏目、视觉和已确认内容。
 
@@ -20,7 +20,7 @@
 
 - 中文默认路由位于 `docs/`，英文位于 `docs/en/`；VitePress locale 配置统一位于 `docs/.vitepress/config.mts`。
 - 未来新增语言时，在 `docs/<locale>/` 添加对应页面，并在 VitePress `locales` 中登记语言、标题、描述和导航。
-- 导航站点数据集中在 `docs/.vitepress/data/links.ts`。每条链接需有准确的分类、中英文标题与简介、有效 URL。
+- 产品提交平台数据集中在 `docs/.vitepress/data/links.ts`。每条链接需对应真实的提交入口，提供准确的分类、中英文标题与简介、有效 URL；不要收录仅供用户使用的普通 SaaS 或 AI 产品。
 - 页面 frontmatter 必须包含唯一 `title` 与准确的 `description`。SEO head 标签集中在 `docs/.vitepress/seo.ts`。
 - 正式域名为 `https://apilaile.com`。GitHub Actions 构建可通过 `SITE_URL` 注入正式域名；本地默认不生成依赖域名的标签。
 - 不要编造发布日期、作者或站点背书；外链使用 `target="_blank"` 时必须带 `rel="noopener noreferrer"`。

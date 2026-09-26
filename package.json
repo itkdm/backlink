@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "布吉岛外链导航：精选独立网站、增长工具与开发资源",
+  "description": "布吉岛外链导航：出海 SaaS、AI 工具与产品提交平台目录",
   "packageManager": "pnpm@10.11.0",
   "engines": {
     "node": ">=20"

@@ -17,110 +17,86 @@ export type LinkCategory = {
 
 export const categories: LinkCategory[] = [
   {
-    id: 'seo-growth',
-    name: { zh: 'SEO 与增长', en: 'SEO & Growth' },
-    description: { zh: '搜索表现、趋势洞察与网站增长工具。', en: 'Search performance, trend research, and website growth tools.' }
+    id: 'saas-directories',
+    name: { zh: 'SaaS 产品目录', en: 'SaaS Directories' },
+    description: { zh: '提交 SaaS、独立软件和互联网产品，获得目录展示机会。', en: 'Submit SaaS, software, and internet products for directory listings.' }
   },
   {
-    id: 'ai-development',
-    name: { zh: 'AI 与开发', en: 'AI & Development' },
-    description: { zh: '构建、部署和管理互联网产品常用的平台。', en: 'Platforms for building, deploying, and maintaining internet products.' }
+    id: 'ai-directories',
+    name: { zh: 'AI 工具目录', en: 'AI Tool Directories' },
+    description: { zh: '面向 AI 产品的收录与提交入口。', en: 'Submission pages for AI product listings.' }
   },
   {
-    id: 'web-products',
-    name: { zh: '建站与产品', en: 'Web & Products' },
-    description: { zh: '发现新产品、交流创业经验和验证想法。', en: 'Discover products, exchange founder insights, and validate ideas.' }
+    id: 'launch-platforms',
+    name: { zh: '产品发布社区', en: 'Launch Communities' },
+    description: { zh: '发布新产品，获取早期曝光、反馈和讨论。', en: 'Launch new products to gain early visibility, feedback, and discussion.' }
   },
   {
-    id: 'design-data',
-    name: { zh: '设计与分析', en: 'Design & Analytics' },
-    description: { zh: '制作网站体验、视觉内容和经营数据分析。', en: 'Create web experiences, visual assets, and product insights.' }
+    id: 'submission-lists',
+    name: { zh: '提交清单与工具', en: 'Submission Lists & Tools' },
+    description: { zh: '查找更多可提交产品的目录与社区。', en: 'Find more directories and communities where you can submit a product.' }
   }
 ]
 
 export const directoryLinks: DirectoryLink[] = [
   {
-    id: 'search-console', category: 'seo-growth', featured: true,
-    name: { zh: 'Google Search Console', en: 'Google Search Console' },
-    description: { zh: '查看 Google 搜索中的网站表现、索引状态与技术问题。', en: 'Monitor search performance, indexing, and technical issues in Google Search.' },
-    url: 'https://search.google.com/search-console/about'
+    id: 'saashub', category: 'saas-directories', featured: true,
+    name: { zh: 'SaaSHub', en: 'SaaSHub' },
+    description: { zh: '提交软件或 SaaS 产品，完善产品资料后可申请收录。', en: 'Submit a software or SaaS product for review and listing.' },
+    url: 'https://www.saashub.com/submit'
   },
   {
-    id: 'google-trends', category: 'seo-growth', featured: true,
-    name: { zh: 'Google Trends', en: 'Google Trends' },
-    description: { zh: '探索不同地区与时间范围内的搜索兴趣变化。', en: 'Explore how search interest changes across regions and time.' },
-    url: 'https://trends.google.com/trends/'
+    id: '10015-product-finder', category: 'saas-directories',
+    name: { zh: '10015 Product Finder', en: '10015 Product Finder' },
+    description: { zh: '提交 SaaS、应用、浏览器扩展和其他在线产品。', en: 'Submit SaaS, apps, browser extensions, and other online products.' },
+    url: 'https://10015.io/product-finder/submit'
   },
   {
-    id: 'bing-webmaster', category: 'seo-growth',
-    name: { zh: 'Bing Webmaster Tools', en: 'Bing Webmaster Tools' },
-    description: { zh: '管理网站在 Bing 搜索中的抓取、索引和表现。', en: 'Manage crawling, indexing, and performance in Bing Search.' },
-    url: 'https://www.bing.com/webmasters/'
+    id: 'betalist', category: 'saas-directories',
+    name: { zh: 'BetaList', en: 'BetaList' },
+    description: { zh: '面向早期科技创业项目的投稿平台；按其当前规则审核与收费。', en: 'Submit an early-stage technology startup for editorial review; current submission plans may be paid.' },
+    url: 'https://betalist.com/submit/'
   },
   {
-    id: 'ahrefs-backlink-checker', category: 'seo-growth',
-    name: { zh: 'Ahrefs Backlink Checker', en: 'Ahrefs Backlink Checker' },
-    description: { zh: '查看网站或页面的部分外链数据，适合快速了解链接概况。', en: 'Check a sample of backlink data for a quick overview of a site or page.' },
-    url: 'https://ahrefs.com/backlink-checker'
+    id: 'futurepedia', category: 'ai-directories', featured: true,
+    name: { zh: 'Futurepedia', en: 'Futurepedia' },
+    description: { zh: '向 AI 工具目录提交产品；需经过编辑审核，页面提供付费收录方案。', en: 'Submit an AI tool for editorial review; paid listing options are available.' },
+    url: 'https://www.futurepedia.io/submit-tool'
   },
   {
-    id: 'github', category: 'ai-development', featured: true,
-    name: { zh: 'GitHub', en: 'GitHub' },
-    description: { zh: '托管代码、协作开发，并发现开源项目与开发者工具。', en: 'Host code, collaborate, and explore open-source projects and developer tools.' },
-    url: 'https://github.com/'
+    id: 'futuretools', category: 'ai-directories',
+    name: { zh: 'Future Tools', en: 'Future Tools' },
+    description: { zh: '提交 AI 工具信息，由网站编辑审核后决定是否收录。', en: 'Submit an AI tool for consideration by the directory editor.' },
+    url: 'https://futuretools.io/submit-a-tool'
   },
   {
-    id: 'cloudflare', category: 'ai-development',
-    name: { zh: 'Cloudflare', en: 'Cloudflare' },
-    description: { zh: '提供域名、网络安全、边缘计算和开发平台服务。', en: 'A platform for domains, network security, edge computing, and development.' },
-    url: 'https://www.cloudflare.com/'
+    id: 'forward-future', category: 'ai-directories',
+    name: { zh: 'Forward Future', en: 'Forward Future' },
+    description: { zh: '免费提交 AI 工具，填写产品资料后等待人工审核。', en: 'Submit an AI tool for free; listings are reviewed by an editor.' },
+    url: 'https://forwardfuture.com/tools/submit'
   },
   {
-    id: 'vercel', category: 'ai-development',
-    name: { zh: 'Vercel', en: 'Vercel' },
-    description: { zh: '面向 Web 项目的前端部署与开发平台。', en: 'A frontend cloud platform for deploying and developing web projects.' },
-    url: 'https://vercel.com/'
+    id: 'toolpilot', category: 'ai-directories',
+    name: { zh: 'ToolPilot', en: 'ToolPilot' },
+    description: { zh: 'AI 工具目录提交入口；免费方案要求在自己的网站添加对方链接。', en: 'Submit an AI tool; its free listing currently requires a reciprocal link.' },
+    url: 'https://www.toolpilot.ai/pages/submit-your-ai-tool'
   },
   {
-    id: 'openai-platform', category: 'ai-development',
-    name: { zh: 'OpenAI Platform', en: 'OpenAI Platform' },
-    description: { zh: '浏览 OpenAI API 文档、开发工具和平台资源。', en: 'Explore OpenAI API documentation, developer tools, and platform resources.' },
-    url: 'https://platform.openai.com/'
-  },
-  {
-    id: 'product-hunt', category: 'web-products', featured: true,
+    id: 'product-hunt', category: 'launch-platforms', featured: true,
     name: { zh: 'Product Hunt', en: 'Product Hunt' },
-    description: { zh: '发现每天发布的新产品，并了解创作者与用户反馈。', en: 'Discover newly launched products and explore maker and user feedback.' },
-    url: 'https://www.producthunt.com/'
+    description: { zh: '发布产品并参与社区讨论；需要个人账号并遵守发布规则。', en: 'Launch a product and join the community; a personal account and platform rules apply.' },
+    url: 'https://www.producthunt.com/posts/new'
   },
   {
-    id: 'indie-hackers', category: 'web-products',
-    name: { zh: 'Indie Hackers', en: 'Indie Hackers' },
-    description: { zh: '独立创业者分享产品进展、收入经验和经营方法的社区。', en: 'A community where independent founders share product, revenue, and business insights.' },
-    url: 'https://www.indiehackers.com/'
+    id: 'uneed', category: 'launch-platforms', featured: true,
+    name: { zh: 'Uneed', en: 'Uneed' },
+    description: { zh: '提交产品进入发布队列，可选择免费排期或付费加速发布。', en: 'Submit a product to the launch queue, with free and paid launch options.' },
+    url: 'https://www.uneed.best/submit'
   },
   {
-    id: 'hacker-news', category: 'web-products',
-    name: { zh: 'Hacker News', en: 'Hacker News' },
-    description: { zh: '围绕技术、创业和互联网产品的社区讨论。', en: 'Community discussions about technology, startups, and internet products.' },
-    url: 'https://news.ycombinator.com/'
-  },
-  {
-    id: 'figma', category: 'design-data',
-    name: { zh: 'Figma Community', en: 'Figma Community' },
-    description: { zh: '探索设计文件、组件和社区制作的资源。', en: 'Explore design files, components, and resources made by the community.' },
-    url: 'https://www.figma.com/community'
-  },
-  {
-    id: 'unsplash', category: 'design-data',
-    name: { zh: 'Unsplash', en: 'Unsplash' },
-    description: { zh: '浏览可用于创作项目的摄影图片资源。', en: 'Browse photography for creative projects.' },
-    url: 'https://unsplash.com/'
-  },
-  {
-    id: 'excalidraw', category: 'design-data',
-    name: { zh: 'Excalidraw', en: 'Excalidraw' },
-    description: { zh: '用手绘风格画布快速表达流程、想法和结构。', en: 'Quickly sketch flows, ideas, and systems on a hand-drawn canvas.' },
-    url: 'https://excalidraw.com/'
+    id: 'saashub-submit', category: 'submission-lists',
+    name: { zh: 'SaaSHub Submit', en: 'SaaSHub Submit' },
+    description: { zh: '免费产品推广工具，整理了可继续提交产品的目录与社区清单。', en: 'A free promotion tool with a list of directories and communities for further submissions.' },
+    url: 'https://www.saashub.com/submit/list'
   }
 ]
