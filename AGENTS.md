@@ -1,0 +1,32 @@
+# AGENTS.md
+
+本文件是 AI Agent 在本仓库中的协作入口。
+
+## 项目定位
+
+- 布吉岛外链导航：以中文为默认语言，提供英文版本，整理值得访问的网站、工具和产品资源。
+- 技术栈为 VitePress + Markdown + 少量 Vue 组件，由 pnpm 管理。保留 VitePress 架构。
+- 用户明确要求优先；不要擅自改变栏目、视觉和已确认内容。
+
+## 开发
+
+- Node.js 20+、pnpm 10+。
+- `pnpm docs:dev` 在 `http://localhost:5184/` 启动。
+- `pnpm docs:build` 构建到 `docs/.vitepress/dist/`。
+- 5184 为本项目端口；不要停止或占用 SEO 项目 5181、电商项目 5182、AI Agent Guide 项目 5173。5183 当前属于 `D:\develop\project\shangan`。
+- 修改 VitePress 配置、页面结构或 SEO 逻辑后运行 `pnpm docs:build`。
+
+## 多语言与内容
+
+- 中文默认路由位于 `docs/`，英文位于 `docs/en/`；VitePress locale 配置统一位于 `docs/.vitepress/config.mts`。
+- 未来新增语言时，在 `docs/<locale>/` 添加对应页面，并在 VitePress `locales` 中登记语言、标题、描述和导航。
+- 导航站点数据集中在 `docs/.vitepress/data/links.ts`。每条链接需有准确的分类、中英文标题与简介、有效 URL。
+- 页面 frontmatter 必须包含唯一 `title` 与准确的 `description`。SEO head 标签集中在 `docs/.vitepress/seo.ts`。
+- 正式域名为 `https://apilaile.com`。GitHub Actions 构建可通过 `SITE_URL` 注入正式域名；本地默认不生成依赖域名的标签。
+- 不要编造发布日期、作者或站点背书；外链使用 `target="_blank"` 时必须带 `rel="noopener noreferrer"`。
+
+## 协作边界
+
+- 页面内容放在 `docs/`，公开资源放在 `docs/public/`。
+- 不提交密钥、`.env`、`node_modules/` 或构建输出。
+- 未经用户明确要求，不要提交、推送或部署。

@@ -1,0 +1,19 @@
+{
+  "name": "bujidao-link-directory",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "布吉岛外链导航：精选独立网站、增长工具与开发资源",
+  "packageManager": "pnpm@10.11.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev docs --host 0.0.0.0 --port 5184 --strictPort",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs --host 0.0.0.0 --port 5184 --strictPort"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
