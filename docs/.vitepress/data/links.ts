@@ -1,3 +1,5 @@
+import ahrefsDrData from './ahrefs-dr.json'
+
 export type LinkLanguage = 'zh' | 'en'
 export type LocalizedText = Record<LinkLanguage, string>
 export type FeeModel = 'free' | 'paid' | 'freemium' | 'conditional' | 'unknown'
@@ -25,7 +27,16 @@ export type DirectoryLink = {
   availability: 'open' | 'paused' | 'unknown'
   verifiedAt: string
   domainRating?: { value: number; source: 'Ahrefs'; checkedAt: string }
+  popular?: boolean
   featured?: boolean
+}
+
+export type PaidPromotion = {
+  id: string
+  name: LocalizedText
+  description: LocalizedText
+  url: string
+  logoUrl?: string
 }
 
 export type LinkCategory = {
@@ -43,9 +54,9 @@ export const categories: LinkCategory[] = [
 
 // Fee, backlink and review fields describe the platform's published policy when verified.
 // Unknown is intentional: never infer SEO attributes or current availability from a submission form.
-export const directoryLinks: DirectoryLink[] = [
+const directoryLinkRecords: DirectoryLink[] = [
   {
-    id: 'saashub', category: 'saas-directories', featured: true,
+    id: 'saashub', category: 'saas-directories', featured: true, popular: true,
     name: { zh: 'SaaSHub', en: 'SaaSHub' },
     description: { zh: '提交 SaaS、软件和应用产品，由平台审核后收录。', en: 'Submit SaaS, software, and apps for review and listing.' },
     homepageUrl: 'https://www.saashub.com/', submissionUrl: 'https://www.saashub.com/services/submit', pricingUrl: 'https://www.saashub.com/featured-products',
@@ -72,7 +83,7 @@ export const directoryLinks: DirectoryLink[] = [
     reviewMethod: 'editorial', backlinkRel: 'follow', listingIndexability: 'unknown', availability: 'open', verifiedAt: '2026-09-26'
   },
   {
-    id: 'futurepedia', category: 'ai-directories', featured: true,
+    id: 'futurepedia', category: 'ai-directories', featured: true, popular: true,
     name: { zh: 'Futurepedia', en: 'Futurepedia' },
     description: { zh: 'AI 工具目录，提供产品提交和付费收录方案。', en: 'An AI tool directory with product submissions and paid listing options.' },
     homepageUrl: 'https://www.futurepedia.io/', submissionUrl: 'https://www.futurepedia.io/submit-tool', pricingUrl: 'https://www.futurepedia.io/submit-tool',
@@ -108,7 +119,7 @@ export const directoryLinks: DirectoryLink[] = [
     reviewMethod: 'editorial', backlinkRel: 'unknown', listingIndexability: 'unknown', availability: 'open', verifiedAt: '2026-09-26'
   },
   {
-    id: 'product-hunt', category: 'launch-platforms', featured: true,
+    id: 'product-hunt', category: 'launch-platforms', featured: true, popular: true,
     name: { zh: 'Product Hunt', en: 'Product Hunt' },
     description: { zh: '发布新产品并参与产品社区讨论。', en: 'Launch a new product and take part in the product community.' },
     homepageUrl: 'https://www.producthunt.com/', submissionUrl: 'https://www.producthunt.com/posts/new',
@@ -117,7 +128,7 @@ export const directoryLinks: DirectoryLink[] = [
     reviewMethod: 'community', backlinkRel: 'unknown', listingIndexability: 'unknown', availability: 'open', verifiedAt: '2026-09-26'
   },
   {
-    id: 'uneed', category: 'launch-platforms', featured: true,
+    id: 'uneed', category: 'launch-platforms', featured: true, popular: true,
     name: { zh: 'Uneed', en: 'Uneed' },
     description: { zh: '提交产品参加发布；免费队列开放情况会变化，也提供付费选项。', en: 'Submit a product for launch; free queue availability can change, with paid options also available.' },
     homepageUrl: 'https://www.uneed.best/', submissionUrl: 'https://www.uneed.best/submit', pricingUrl: 'https://www.uneed.best/pricing',
@@ -135,6 +146,29 @@ export const directoryLinks: DirectoryLink[] = [
     reviewMethod: 'editorial', backlinkRel: 'unknown', listingIndexability: 'unknown', availability: 'open', verifiedAt: '2026-09-26'
   }
 ]
+
+type AhrefsDrCache = { ratings: Record<string, { value: number; checkedAt: string }> }
+const ahrefsDrCache = ahrefsDrData as AhrefsDrCache
+
+function normalizeDomain(url: string) {
+  try { return new URL(url).hostname.toLowerCase().replace(/^www\./, '') }
+  catch { return '' }
+}
+
+export const directoryLinks: DirectoryLink[] = directoryLinkRecords.map((link) => {
+  const rating = ahrefsDrCache.ratings[normalizeDomain(link.homepageUrl)]
+  return rating
+    ? { ...link, domainRating: { value: rating.value, source: 'Ahrefs', checkedAt: rating.checkedAt } }
+    : link
+})
+
+export function domainRatingStyle(value?: number): Record<string, string> {
+  const progress = Math.min(100, Math.max(0, value ?? 0))
+  return { '--dr-progress': `${progress}%` }
+}
+
+// Paid homepage placements remain hidden until an actual campaign is added.
+export const paidPromotions: PaidPromotion[] = []
 
 export const feeLabels: Record<LinkLanguage, Record<FeeModel, string>> = {
   zh: { free: '免费', paid: '收费', freemium: '免费 / 付费', conditional: '有条件免费', unknown: '费用未知' },

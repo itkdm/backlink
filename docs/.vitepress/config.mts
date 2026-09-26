@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { createSeoHead } from './seo'
+import { directoryLinks } from './data/links'
 
 const siteUrl = process.env.SITE_URL
 
@@ -16,6 +17,21 @@ export default defineConfig({
   transformHead({ pageData, siteData, title, description }) {
     return createSeoHead({ pageData, siteData, title, description, siteUrl })
   },
+  transformPageData(pageData) {
+    const id = pageData.params?.id
+    const link = directoryLinks.find((item) => item.id === id)
+    if (!link || !pageData.filePath.includes('directory/[id].md')) return
+
+    const isEnglish = pageData.filePath.startsWith('en/')
+    const name = link.name[isEnglish ? 'en' : 'zh']
+    const description = link.description[isEnglish ? 'en' : 'zh']
+    return {
+      title: isEnglish ? `${name} Submission Site` : `${name} 提交平台`,
+      description: isEnglish
+        ? `${description} View its fees, requirements, review process, and backlink details.`
+        : `${description} 查看${name}的费用、提交要求、审核方式和外链信息。`
+    }
+  },
   locales: {
     root: {
       label: '简体中文',
@@ -25,14 +41,14 @@ export default defineConfig({
       themeConfig: {
         siteTitle: '布吉岛外链导航',
         nav: [
-          { text: '提交平台', link: '/#directory' },
-          { text: 'SaaS 目录', link: '/#saas-directories' },
-          { text: 'AI 目录', link: '/#ai-directories' },
-          { text: '发布社区', link: '/#launch-platforms' },
-          { text: '关于本站', link: '/about' }
+          { text: '首页', link: '/' },
+          { text: '广场', link: '/directory/' },
+          { text: '关于', link: '/about' }
         ],
         sidebar: {
-          '/about': [{ text: '关于本站', items: [{ text: '收录原则', link: '/about' }] }]
+          '/directory/': [{ text: '广场', items: [{ text: '全部平台', link: '/directory/' }] }],
+          '/blog/': [{ text: '博客', items: [{ text: '概览', link: '/blog/' }] }],
+          '/about': [{ text: '关于', items: [{ text: '概览', link: '/about' }] }]
         },
         outline: { label: '本页目录', level: [2, 3] },
         docFooter: { prev: '上一篇', next: '下一篇' },
@@ -51,14 +67,14 @@ export default defineConfig({
       themeConfig: {
         siteTitle: 'Bujidao Links',
         nav: [
-          { text: 'Submission Sites', link: '/en/#directory' },
-          { text: 'SaaS Directories', link: '/en/#saas-directories' },
-          { text: 'AI Directories', link: '/en/#ai-directories' },
-          { text: 'Launch Communities', link: '/en/#launch-platforms' },
+          { text: 'Home', link: '/en/' },
+          { text: 'Directory', link: '/en/directory/' },
           { text: 'About', link: '/en/about' }
         ],
         sidebar: {
-          '/en/about': [{ text: 'About', items: [{ text: 'Editorial Policy', link: '/en/about' }] }]
+          '/en/directory/': [{ text: 'Directory', items: [{ text: 'All platforms', link: '/en/directory/' }] }],
+          '/en/blog/': [{ text: 'Blog', items: [{ text: 'Overview', link: '/en/blog/' }] }],
+          '/en/about': [{ text: 'About', items: [{ text: 'Overview', link: '/en/about' }] }]
         },
         outline: { label: 'On this page', level: [2, 3] },
         docFooter: { prev: 'Previous', next: 'Next' },

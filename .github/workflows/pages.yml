@@ -3,6 +3,9 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # Run once a day at 02:23 UTC (10:23 China Standard Time).
+    - cron: '23 2 * * *'
   workflow_dispatch:
 
 permissions:
@@ -38,6 +41,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Sync Ahrefs Domain Ratings
+        if: github.event_name == 'schedule'
+        run: pnpm dr:sync
+        env:
+          AHREFS_API_KEY: ${{ secrets.AHREFS_API_KEY }}
 
       - name: Build site
         run: pnpm docs:build
