@@ -7,8 +7,8 @@ const props = defineProps<{ locale: LinkLanguage }>()
 const router = useRouter()
 const popularLinks = computed(() => directoryLinks.filter((link) => link.popular))
 const copy = computed(() => props.locale === 'zh'
-  ? { popular: '热门网站', popularSub: '值得优先了解的产品提交平台', all: '查看全部平台', fee: '费用', backlink: '外链', ad: '付费推广', website: '了解平台', emptyPopular: '热门平台正在整理中。' }
-  : { popular: 'Popular platforms', popularSub: 'Notable places to submit your product', all: 'Explore all platforms', fee: 'Fee', backlink: 'Link', ad: 'Sponsored', website: 'Visit platform', emptyPopular: 'Popular picks are being curated.' })
+  ? { popular: '热门网站', popularSub: '值得优先了解的产品提交平台', all: '查看全部平台', backlink: '外链', ad: '付费推广', website: '进入平台', emptyPopular: '热门平台正在整理中。' }
+  : { popular: 'Popular platforms', popularSub: 'Notable places to submit your product', all: 'Explore all platforms', backlink: 'Link', ad: 'Sponsored', website: 'Visit platform', emptyPopular: 'Popular picks are being curated.' })
 
 function favicon(homepageUrl: string, logoUrl?: string) {
   if (logoUrl) return logoUrl
@@ -29,21 +29,21 @@ function favicon(homepageUrl: string, logoUrl?: string) {
       </header>
 
       <div v-if="popularLinks.length" class="home-popular-grid">
-        <article v-for="link in popularLinks" :key="link.id" class="home-popular-card" role="link" tabindex="0" @click="router.go(`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`)" @keydown.enter="router.go(`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`)">
+        <article v-for="link in popularLinks" :key="link.id" class="home-popular-card" role="link" tabindex="0" @click="router.go(`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`)" @keydown.enter.self="router.go(`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`)">
           <div class="home-popular-card-top">
             <span class="home-logo-fallback" aria-hidden="true">{{ link.name[props.locale].slice(0, 1) }}</span>
             <img class="home-logo" :src="favicon(link.homepageUrl, link.logoUrl)" alt="" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
           <span class="home-card-category" :title="categories.find((category) => category.id === link.category)?.name[props.locale] || (props.locale === 'zh' ? '其他目录' : 'Other directory')">{{ categories.find((category) => category.id === link.category)?.name[props.locale] || (props.locale === 'zh' ? '其他目录' : 'Other directory') }}</span>
-            <span class="home-dr" :style="domainRatingStyle(link.domainRating?.value)"><strong>{{ link.domainRating?.value ?? '—' }}</strong><small>DR</small></span>
+            <span v-if="link.domainRating" class="home-dr" :style="domainRatingStyle(link.domainRating.value)"><strong>{{ link.domainRating.value }}</strong><small>DR</small></span>
           </div>
           <h3 :title="link.name[props.locale] || link.homepageUrl">{{ link.name[props.locale] || link.homepageUrl }}</h3>
           <p class="home-card-description" :title="link.description[props.locale]">{{ link.description[props.locale] || (props.locale === 'zh' ? '暂无简介' : 'Description unavailable') }}</p>
           <div class="home-card-footer">
             <div class="home-card-meta">
-              <span :title="`${copy.fee} · ${feeLabels[props.locale][link.feeModel]}`">{{ copy.fee }} · {{ feeLabels[props.locale][link.feeModel] }}</span>
-              <span :title="`${copy.backlink} · ${backlinkLabels[props.locale][link.backlinkRel]}`">{{ copy.backlink }} · {{ backlinkLabels[props.locale][link.backlinkRel] }}</span>
+              <span v-if="link.feeModel !== 'unknown'">{{ feeLabels[props.locale][link.feeModel] }}</span>
+              <span v-if="link.backlinkRel !== 'unknown'" :title="`${copy.backlink} · ${backlinkLabels[props.locale][link.backlinkRel]}`">{{ copy.backlink }} · {{ backlinkLabels[props.locale][link.backlinkRel] }}</span>
             </div>
-            <span class="home-card-link">{{ copy.website }} <span aria-hidden="true">↗</span></span>
+            <a class="home-card-link" :href="link.homepageUrl" target="_blank" rel="noopener noreferrer" @click.stop>{{ copy.website }} <span aria-hidden="true">↗</span></a>
           </div>
         </article>
       </div>

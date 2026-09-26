@@ -1,6 +1,8 @@
 ---
 title: 关于布吉岛外链导航｜产品提交平台收录原则
 description: 了解布吉岛外链导航如何整理可提交出海 SaaS、AI 工具和互联网产品的目录与发布平台。
+sidebar: false
+aside: false
 ---
 
 # 关于布吉岛外链导航
@@ -19,6 +21,6 @@ description: 了解布吉岛外链导航如何整理可提交出海 SaaS、AI �
 
 ## 反馈与联系
 
-发现链接失效或信息有误？欢迎通过 [GitHub Issues](https://github.com/itkdm/backlink/issues) 反馈。
+发现链接失效、信息有误，或有意见建议、付费推广需求？请联系 [contact@itkdm.com](mailto:contact@itkdm.com)。
 
 目前网站提供中文与英文版本。

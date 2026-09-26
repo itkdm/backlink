@@ -58,15 +58,15 @@ function favicon(homepageUrl: string, logoUrl?: string) {
       <h2>{{ copy.about }}</h2>
       <dl class="site-detail-facts">
         <div><dt>{{ copy.category }}</dt><dd>{{ categoryName }}</dd></div>
-        <div><dt>{{ copy.fee }}</dt><dd>{{ feeLabels[locale][link.feeModel] }}</dd></div>
-        <div><dt>{{ copy.backlink }}</dt><dd>{{ backlinkLabels[locale][link.backlinkRel] }}</dd></div>
-        <div><dt>{{ copy.review }}</dt><dd>{{ reviewLabel }}</dd></div>
-        <div><dt>{{ copy.indexability }}</dt><dd>{{ link.listingIndexability === 'indexable' ? copy.indexable : link.listingIndexability === 'noindex' ? copy.noindex : copy.unknown }}</dd></div>
-        <div><dt>{{ copy.status }}</dt><dd>{{ link.availability === 'open' ? copy.open : link.availability === 'paused' ? copy.paused : copy.unknown }}</dd></div>
+        <div v-if="link.feeModel !== 'unknown'"><dt>{{ copy.fee }}</dt><dd>{{ feeLabels[locale][link.feeModel] }}</dd></div>
+        <div v-if="link.backlinkRel !== 'unknown'"><dt>{{ copy.backlink }}</dt><dd>{{ backlinkLabels[locale][link.backlinkRel] }}</dd></div>
+        <div v-if="link.reviewMethod !== 'unknown'"><dt>{{ copy.review }}</dt><dd>{{ reviewLabel }}</dd></div>
+        <div v-if="link.listingIndexability !== 'unknown'"><dt>{{ copy.indexability }}</dt><dd>{{ link.listingIndexability === 'indexable' ? copy.indexable : copy.noindex }}</dd></div>
+        <div v-if="link.availability !== 'unknown'"><dt>{{ copy.status }}</dt><dd>{{ link.availability === 'open' ? copy.open : copy.paused }}</dd></div>
         <div><dt>{{ copy.verified }}</dt><dd>{{ link.verifiedAt }}</dd></div>
-        <div><dt>{{ copy.dr }}</dt><dd>{{ link.domainRating ? `${link.domainRating.value} · ${link.domainRating.source} · ${link.domainRating.checkedAt}` : copy.unknown }}</dd></div>
+        <div v-if="link.domainRating"><dt>{{ copy.dr }}</dt><dd>{{ `${link.domainRating.value} · ${link.domainRating.source} · ${link.domainRating.checkedAt}` }}</dd></div>
       </dl>
-      <p class="site-detail-fee-note"><strong>{{ copy.feeNote }}:</strong> {{ link.feeSummary[locale] }}</p>
+      <p v-if="link.feeModel !== 'unknown'" class="site-detail-fee-note"><strong>{{ copy.feeNote }}:</strong> {{ link.feeSummary[locale] }}</p>
       <p class="site-detail-source"><a :href="link.guidelinesUrl" target="_blank" rel="noopener noreferrer">{{ copy.guidelines }} ↗</a></p>
     </section>
 

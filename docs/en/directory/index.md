@@ -3,6 +3,7 @@ title: Directory | Product Submission Platforms
 description: Search and filter directories and launch platforms for SaaS, AI tools, and software products.
 sidebar: false
 aside: false
+lastUpdated: false
 ---
 
 <script setup>

@@ -172,6 +172,9 @@
 .fee-filters { display: flex; gap: 6px; overflow-x: auto; padding: 1px 0 2px; scrollbar-width: thin; }
 .fee-filters button { flex: 0 0 auto; padding: 5px 9px; border: 1px solid var(--vp-c-border); border-radius: 4px; background: transparent; color: var(--vp-c-text-2); font: inherit; font-size: 10px; cursor: pointer; }
 .fee-filters button.active { border-color: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); color: var(--vp-c-brand-1); }
+.dr-range-filters { display: flex; gap: 6px; overflow-x: auto; padding: 1px 0 2px; scrollbar-width: thin; }
+.dr-range-filters button { flex: 0 0 auto; padding: 5px 9px; border: 1px solid var(--vp-c-border); border-radius: 4px; background: transparent; color: var(--vp-c-text-2); font: inherit; font-size: 10px; cursor: pointer; }
+.dr-range-filters button.active { border-color: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); color: var(--vp-c-brand-1); }
 .directory-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .directory-card { display: flex; min-width: 0; min-height: 156px; flex-direction: column; padding: 12px 13px 11px; border: 1px solid var(--vp-c-border); border-radius: 7px; background: var(--vp-c-bg); cursor: pointer; transition: transform .18s ease, border-color .18s, box-shadow .18s; animation: card-arrive .35s both; animation-delay: calc(var(--card-index) * 18ms); }
 .directory-card:hover { transform: translateY(-3px); border-color: rgba(117, 155, 60, .55); box-shadow: 0 9px 24px rgba(31, 42, 26, .055); }
@@ -191,7 +194,7 @@
 .card-badges { display: flex; min-width: 0; flex-wrap: wrap; gap: 5px; }
 .card-badges span { max-width: 100%; overflow: hidden; padding: 4px 7px; border-radius: 4px; background: var(--vp-c-bg-soft); color: var(--vp-c-text-2); font-size: 9px; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }
 .card-badges .fee-badge { color: var(--vp-c-brand-1); }
-.directory-card-link { flex: 0 0 auto; margin-left: auto; color: var(--vp-c-brand-1); font-size: 10px; font-weight: 650; line-height: 1.45; white-space: nowrap; }
+.directory-card-link { flex: 0 0 auto; margin-left: auto; color: var(--vp-c-brand-1); font-size: 10px; font-weight: 650; line-height: 1.45; text-decoration: none; white-space: nowrap; }
 .directory-empty { display: grid; min-height: 180px; place-items: center; border: 1px dashed var(--vp-c-border); border-radius: 7px; color: var(--vp-c-text-2); font-size: 13px; }
 .directory-note { margin: 13px 0 0; color: var(--vp-c-text-3); font-size: 10px; }
 @keyframes card-arrive { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }

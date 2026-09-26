@@ -1,6 +1,8 @@
 ---
 title: About Bujidao Backlink Directory | Submission Site Policy
 description: Learn how Bujidao lists platforms where global SaaS, AI tools, and internet products can be submitted.
+sidebar: false
+aside: false
 ---
 
 # About Bujidao Backlink Directory
@@ -19,6 +21,6 @@ Popular picks on the homepage are editorial selections, not a live traffic ranki
 
 ## Feedback and contact
 
-Found a broken link or outdated detail? Send feedback through [GitHub Issues](https://github.com/itkdm/backlink/issues).
+Found a broken link, outdated detail, or want to discuss feedback or paid promotion? Contact [contact@itkdm.com](mailto:contact@itkdm.com).
 
 The site is currently available in Chinese and English.
