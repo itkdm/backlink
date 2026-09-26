@@ -73,7 +73,7 @@
 .home-all-link { flex: 0 0 auto; color: var(--vp-c-brand-1); font-size: 11px; text-decoration: none; }
 .home-all-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 .home-popular-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.home-popular-card { display: flex; min-height: 156px; flex-direction: column; padding: 12px 13px 11px; border: 1px solid var(--vp-c-border); border-radius: 7px; background: var(--vp-c-bg); cursor: pointer; transition: transform .18s, border-color .18s, box-shadow .18s; }
+.home-popular-card { display: flex; min-height: 148px; flex-direction: column; padding: 12px 13px 11px; border: 1px solid var(--vp-c-border); border-radius: 7px; background: var(--vp-c-bg); cursor: pointer; transition: transform .18s, border-color .18s, box-shadow .18s; }
 .home-popular-card:hover { transform: translateY(-2px); border-color: rgba(117, 155, 60, .55); box-shadow: 0 8px 22px rgba(31, 42, 26, .05); }
 .home-popular-card-top { display: flex; align-items: center; gap: 8px; }
 .home-logo-fallback, .home-logo { display: grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; border-radius: 6px; background: var(--vp-c-bg-soft); color: var(--vp-c-brand-1); font-size: 13px; font-weight: 750; object-fit: contain; }
@@ -82,10 +82,10 @@
 .home-dr { position: relative; display: flex; width: 37px; height: 37px; flex: 0 0 37px; flex-direction: column; align-items: center; justify-content: center; margin-left: auto; border: 2px solid transparent; border-radius: 10px; background: linear-gradient(var(--vp-c-bg), var(--vp-c-bg)) padding-box, conic-gradient(var(--vp-c-brand-1) 0 var(--dr-progress, 0%), var(--vp-c-brand-soft) var(--dr-progress, 0%) 100%) border-box; line-height: 1; }
 .home-dr strong { position: relative; z-index: 1; font-size: 12px; }
 .home-dr small { position: relative; z-index: 1; margin-top: 2px; color: var(--vp-c-text-3); font-size: 7px; }
-.home-popular-card h3 { overflow: hidden; margin: 5px 0 2px; font-size: 14px; font-weight: 680; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
-.home-card-description { display: -webkit-box; min-height: 3.1em; overflow: hidden; margin: 0; color: var(--vp-c-text-2); font-size: 11px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
-.VPHome .home-popular-card p.home-card-description { margin: 0; }
-.home-card-footer { display: flex; min-width: 0; align-items: center; gap: 8px; margin-top: auto; padding-top: 6px; }
+.home-popular-card-top h3 { min-width: 0; flex: 1 1 auto; overflow: hidden; margin: 0; font-size: 14px; font-weight: 680; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+.home-card-description { display: -webkit-box; min-height: 3.1em; overflow: hidden; margin: 5px 0 0; color: var(--vp-c-text-2); font-size: 11px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.VPHome .home-popular-card p.home-card-description { margin: 5px 0 0; }
+.home-card-footer { display: flex; min-width: 0; align-items: center; gap: 8px; margin-top: auto; padding-top: 3px; }
 .home-card-meta { display: flex; min-width: 0; flex-wrap: wrap; gap: 5px; }
 .home-card-meta span { max-width: 100%; overflow: hidden; padding: 4px 7px; border-radius: 4px; background: var(--vp-c-bg-soft); color: var(--vp-c-text-2); font-size: 9px; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }
 .home-card-link { flex: 0 0 auto; margin-left: auto; color: var(--vp-c-brand-1); font-size: 10px; font-weight: 600; line-height: 1.45; text-decoration: none; white-space: nowrap; }
@@ -176,7 +176,7 @@
 .dr-range-filters button { flex: 0 0 auto; padding: 5px 9px; border: 1px solid var(--vp-c-border); border-radius: 4px; background: transparent; color: var(--vp-c-text-2); font: inherit; font-size: 10px; cursor: pointer; }
 .dr-range-filters button.active { border-color: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); color: var(--vp-c-brand-1); }
 .directory-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.directory-card { display: flex; min-width: 0; min-height: 156px; flex-direction: column; padding: 12px 13px 11px; border: 1px solid var(--vp-c-border); border-radius: 7px; background: var(--vp-c-bg); cursor: pointer; transition: transform .18s ease, border-color .18s, box-shadow .18s; animation: card-arrive .35s both; animation-delay: calc(var(--card-index) * 18ms); }
+.directory-card { display: flex; min-width: 0; min-height: 148px; flex-direction: column; padding: 12px 13px 11px; border: 1px solid var(--vp-c-border); border-radius: 7px; background: var(--vp-c-bg); cursor: pointer; transition: transform .18s ease, border-color .18s, box-shadow .18s; animation: card-arrive .35s both; animation-delay: calc(var(--card-index) * 18ms); }
 .directory-card:hover { transform: translateY(-3px); border-color: rgba(117, 155, 60, .55); box-shadow: 0 9px 24px rgba(31, 42, 26, .055); }
 .card-topline { display: flex; min-width: 0; align-items: center; gap: 8px; }
 .site-logo-fallback, .site-logo { display: grid; width: 31px; height: 31px; place-items: center; flex: 0 0 31px; border-radius: 6px; background: var(--vp-c-bg-soft); color: var(--vp-c-brand-1); font-size: 14px; font-weight: 750; object-fit: contain; }
@@ -187,10 +187,10 @@
 .dr-badge { position: relative; display: flex; width: 43px; height: 43px; flex: 0 0 43px; flex-direction: column; align-items: center; justify-content: center; margin-left: auto; border: 2px solid transparent; border-radius: 11px; background: linear-gradient(var(--vp-c-bg), var(--vp-c-bg)) padding-box, conic-gradient(var(--vp-c-brand-1) 0 var(--dr-progress, 0%), var(--vp-c-brand-soft) var(--dr-progress, 0%) 100%) border-box; line-height: 1; }
 .dr-badge strong { position: relative; z-index: 1; font-size: 13px; font-weight: 700; }
 .dr-badge small { position: relative; z-index: 1; margin-top: 2px; color: var(--vp-c-text-3); font-size: 8px; }
-.directory-card h3 { overflow: hidden; margin: 5px 0 2px; font-size: 14px; font-weight: 680; letter-spacing: -.02em; text-overflow: ellipsis; white-space: nowrap; }
-.directory-card .card-description { display: -webkit-box; min-height: 3.1em; overflow: hidden; margin: 0; color: var(--vp-c-text-2); font-size: 11px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
-.VPDoc .directory-card p.card-description { margin: 0; }
-.directory-card-footer { display: flex; min-width: 0; align-items: center; gap: 8px; margin-top: auto; padding-top: 6px; }
+.card-topline h3 { min-width: 0; flex: 1 1 auto; overflow: hidden; margin: 0; font-size: 14px; font-weight: 680; letter-spacing: -.02em; text-overflow: ellipsis; white-space: nowrap; }
+.directory-card .card-description { display: -webkit-box; min-height: 3.1em; overflow: hidden; margin: 5px 0 0; color: var(--vp-c-text-2); font-size: 11px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.VPDoc .directory-card p.card-description { margin: 5px 0 0; }
+.directory-card-footer { display: flex; min-width: 0; align-items: center; gap: 8px; margin-top: auto; padding-top: 3px; }
 .card-badges { display: flex; min-width: 0; flex-wrap: wrap; gap: 5px; }
 .card-badges span { max-width: 100%; overflow: hidden; padding: 4px 7px; border-radius: 4px; background: var(--vp-c-bg-soft); color: var(--vp-c-text-2); font-size: 9px; line-height: 1.45; text-overflow: ellipsis; white-space: nowrap; }
 .card-badges .fee-badge { color: var(--vp-c-brand-1); }
@@ -211,7 +211,7 @@
   .VPDoc:has(.directory-shell) { padding-top: 20px; }
   .directory-shell { padding: 18px 22px 70px; }
   .directory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
-  .directory-card { min-height: 156px; padding: 12px 13px 11px; }
+  .directory-card { min-height: 148px; padding: 12px 13px 11px; }
 }
 @media (max-width: 520px) {
   .VPHomeHero { padding-top: 38px !important; padding-bottom: 16px !important; }
@@ -228,7 +228,7 @@
   .VPDoc:has(.directory-shell) { padding-top: 16px; }
   .directory-shell { padding: 16px 19px 56px; }
   .directory-grid { grid-template-columns: 1fr; }
-  .directory-card { min-height: 156px; }
+  .directory-card { min-height: 148px; }
   .site-detail { padding: 16px 20px 58px; }
   .site-detail-header { align-items: flex-start; gap: 12px; margin: 26px 0 22px; }
   .site-detail-logo-wrap, .site-detail-logo-fallback, .site-detail-logo { width: 46px; height: 46px; flex-basis: 46px; }

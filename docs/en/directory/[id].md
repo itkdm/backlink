@@ -3,6 +3,7 @@ title: Product Submission Platform Details
 description: Review fees, submission requirements, review methods, and backlink details for this platform.
 sidebar: false
 aside: false
+lastUpdated: false
 prev: false
 next: false
 ---

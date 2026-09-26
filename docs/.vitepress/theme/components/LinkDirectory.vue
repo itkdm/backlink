@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vitepress'
-import { backlinkLabels, categories, directoryLinks, domainRatingStyle, feeLabels, productTypeLabels, type FeeModel, type LinkLanguage } from '../../data/links'
+import { backlinkLabels, directoryLinks, domainRatingStyle, feeLabels, loginRequirementLabels, productTypeLabels, type FeeModel, type LinkLanguage, type ProductType } from '../../data/links'
 
 const props = defineProps<{ locale: LinkLanguage }>()
 const router = useRouter()
 const locale = computed(() => props.locale)
 const query = ref('')
-const activeCategory = ref('all')
+const activeProductType = ref<ProductType | 'all'>('all')
 const activeFee = ref<FeeModel | 'all'>('all')
 const activeDrRange = ref('all')
 const searchInput = ref<HTMLInputElement>()
@@ -18,31 +18,23 @@ function focusSearch(event: KeyboardEvent) {
   if (event.key === '/' && !isTyping) { event.preventDefault(); searchInput.value?.focus() }
 }
 
-function applyCategoryFromHash() {
-  const categoryId = window.location.hash.slice(1)
-  if (categories.some((category) => category.id === categoryId)) activeCategory.value = categoryId
-}
-
 onMounted(() => {
   window.addEventListener('keydown', focusSearch)
-  window.addEventListener('hashchange', applyCategoryFromHash)
-  applyCategoryFromHash()
 })
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', focusSearch)
-  window.removeEventListener('hashchange', applyCategoryFromHash)
 })
 
 const text = computed(() => props.locale === 'zh'
   ? {
-      search: '搜索平台、产品类型或要求…', all: '全部平台', allFees: '全部费用',
+      search: '搜索平台、产品类型或要求…', allFees: '全部费用', submissionTypes: '收录类型', allProductTypes: '全部收录类型',
       empty: '没有找到匹配的提交平台，换个关键词试试。', label: '产品提交平台', featured: '推荐入口',
       fee: '费用', dr: 'DR', drRange: 'DR 区间', allDr: '全部 DR',
       introduction: '费用、审核、外链与收录状态可能变化，请以平台当前页面为准。',
       note: '外链属性和收录状态仅在有可靠依据时记录；DR 不代表外链效果或排名保证。'
     }
   : {
-      search: 'Search platforms, product types, or requirements…', all: 'All platforms', allFees: 'All fee types',
+      search: 'Search platforms, product types, or requirements…', allFees: 'All fee types', submissionTypes: 'Accepted formats', allProductTypes: 'All formats',
       empty: 'No matching submission platforms. Try another search.', label: 'Product submission platforms', featured: 'Featured',
       fee: 'Fee', dr: 'DR', drRange: 'DR range', allDr: 'All DR',
       introduction: 'Fees, review, backlink, and listing status may change. Check each platform’s current page.',
@@ -58,11 +50,12 @@ const drRangeOptions = computed(() => [
   { value: '61-80', label: '61–80' },
   { value: '81-100', label: '81–100' }
 ])
+const productTypeOptions = computed(() => Object.keys(productTypeLabels[locale.value]) as ProductType[])
 const filteredLinks = computed(() => {
   const normalizedQuery = query.value.trim().toLowerCase()
   return directoryLinks.filter((link) => {
-    const matchesCategory = activeCategory.value === 'all' || link.category === activeCategory.value
-    const matchesFee = activeFee.value === 'all' || link.feeModel === activeFee.value
+    const matchesProductType = activeProductType.value === 'all' || link.accepts.includes(activeProductType.value)
+    const matchesFee = activeFee.value === 'all' || link.feeModels.includes(activeFee.value)
     const matchesDr = activeDrRange.value === 'all' || (() => {
       const [minimum, maximum] = activeDrRange.value.split('-').map(Number)
       const value = link.domainRating?.value
@@ -70,10 +63,9 @@ const filteredLinks = computed(() => {
     })()
     const values = [link.name[locale.value], link.description[locale.value], link.homepageUrl, link.submissionUrl,
       link.feeSummary[locale.value], ...link.requirements.map((item) => item[locale.value]),
-      ...link.accepts.map((type) => productTypeLabels[locale.value][type]),
-      ...categories.filter((category) => category.id === link.category).map((category) => category.name[locale.value])]
+      ...link.accepts.map((type) => productTypeLabels[locale.value][type])]
     const matchesQuery = !normalizedQuery || values.some((value) => value.toLowerCase().includes(normalizedQuery))
-    return matchesCategory && matchesFee && matchesDr && matchesQuery
+    return matchesProductType && matchesFee && matchesDr && matchesQuery
   })
 })
 
@@ -86,6 +78,7 @@ function favicon(url: string, logoUrl?: string) {
 function openDetails(id: string) {
   router.go(`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${id}`)
 }
+
 </script>
 
 <template>
@@ -110,9 +103,9 @@ function openDetails(id: string) {
       <div class="dr-range-filters" role="group" :aria-label="text.drRange">
         <button v-for="range in drRangeOptions" :key="range.value" :class="{ active: activeDrRange === range.value }" @click="activeDrRange = range.value">{{ range.label }}</button>
       </div>
-      <div class="category-filters" role="group" :aria-label="text.label">
-        <button :class="{ active: activeCategory === 'all' }" @click="activeCategory = 'all'">{{ text.all }}</button>
-        <button v-for="category in categories" :key="category.id" :id="category.id" :class="{ active: activeCategory === category.id }" @click="activeCategory = category.id">{{ category.name[locale] }}</button>
+      <div class="category-filters" role="group" :aria-label="text.submissionTypes">
+        <button :class="{ active: activeProductType === 'all' }" @click="activeProductType = 'all'">{{ text.allProductTypes }}</button>
+        <button v-for="productType in productTypeOptions" :key="productType" :class="{ active: activeProductType === productType }" @click="activeProductType = productType">{{ locale === 'zh' ? `收录${productTypeLabels[locale][productType]}` : productTypeLabels[locale][productType] }}</button>
       </div>
     </div>
 
@@ -121,16 +114,16 @@ function openDetails(id: string) {
         <div class="card-topline">
           <span class="site-logo-fallback" aria-hidden="true">{{ link.name[locale].slice(0, 1) }}</span>
           <img class="site-logo" :src="favicon(link.homepageUrl, link.logoUrl)" :alt="''" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
-          <span class="card-category" :title="categories.find((category) => category.id === link.category)?.name[locale] || (locale === 'zh' ? '其他目录' : 'Other directory')">{{ categories.find((category) => category.id === link.category)?.name[locale] || (locale === 'zh' ? '其他目录' : 'Other directory') }}</span>
+          <h3 :title="link.name[locale] || link.homepageUrl">{{ link.name[locale] || link.homepageUrl }}</h3>
           <span v-if="link.featured" class="featured-pill">{{ text.featured }}</span>
           <span v-if="link.domainRating" class="dr-badge" :style="domainRatingStyle(link.domainRating.value)" :title="text.dr"><strong>{{ link.domainRating.value }}</strong><small>DR</small></span>
         </div>
-        <h3 :title="link.name[locale] || link.homepageUrl">{{ link.name[locale] || link.homepageUrl }}</h3>
         <p class="card-description" :title="link.description[locale]">{{ link.description[locale] || (locale === 'zh' ? '暂无简介' : 'Description unavailable') }}</p>
         <div class="directory-card-footer">
           <div class="card-badges">
-            <span v-if="link.feeModel !== 'unknown'" class="fee-badge">{{ feeLabels[locale][link.feeModel] }}</span>
+            <span v-for="fee in link.feeModels" :key="fee" class="fee-badge">{{ feeLabels[locale][fee] }}</span>
             <span v-if="link.backlinkRel !== 'unknown'" class="rel-badge">{{ backlinkLabels[locale][link.backlinkRel] }}</span>
+            <span v-if="link.loginRequirement !== 'unknown'" class="rel-badge" :title="link.loginNote?.[locale]">{{ loginRequirementLabels[locale][link.loginRequirement] }}</span>
           </div>
           <a class="directory-card-link" :href="link.homepageUrl" target="_blank" rel="noopener noreferrer" @click.stop>{{ locale === 'zh' ? '进入平台' : 'Visit platform' }} <span aria-hidden="true">↗</span></a>
         </div>
