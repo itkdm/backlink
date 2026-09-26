@@ -21,4 +21,4 @@ pnpm docs:build
 
 ## 添加提交平台
 
-编辑 `docs/.vitepress/data/links.ts`，填写平台实际的产品提交入口 URL、分类、简短介绍以及中英文名称和说明。页面中的平台卡片由该数据文件生成。
+编辑 `docs/.vitepress/data/links.ts`，维护官网与提交入口、费用、适用产品、提交要求、审核方式、外链属性、索引状态和核实日期。无法确认的项目使用 `unknown`，不要猜测。DR 数值是可选的来源标注数据；展示 Ahrefs DR 时需保留 “Domain Rating by Ahrefs” 的链接归属说明。页面卡片和筛选项由该文件生成。

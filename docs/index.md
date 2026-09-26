@@ -26,10 +26,10 @@ features:
     details: 发布产品，获取早期曝光与反馈。
     link: '#launch-platforms'
     linkText: 查看发布平台
-  - title: 04 / 提交清单与工具
-    details: 继续发现更多产品提交渠道。
-    link: '#submission-lists'
-    linkText: 查看资源
+  - title: 04 / 软件与应用目录
+    details: 提交软件和应用，等待平台审核收录。
+    link: '#software-directories'
+    linkText: 查看提交入口
 ---
 
 <script setup>

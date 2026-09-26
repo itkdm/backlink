@@ -26,10 +26,10 @@ features:
     details: Launch products and get early feedback.
     link: '#launch-platforms'
     linkText: Explore platforms
-  - title: 04 / Submission Lists & Tools
-    details: Find more places to submit your product.
-    link: '#submission-lists'
-    linkText: Explore resources
+  - title: 04 / Software & App Directories
+    details: Submit software and apps for directory review.
+    link: '#software-directories'
+    linkText: View submission pages
 ---
 
 <script setup>
