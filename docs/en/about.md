@@ -1,26 +1,24 @@
 ---
-title: About Bujidao Backlink Directory | Submission Site Policy
-description: Learn how Bujidao lists platforms where global SaaS, AI tools, and internet products can be submitted.
+title: About Bujidao Links | Submission Coverage and Data Sources
+description: Learn which product submission platforms Bujidao lists, how platform details are checked, and how to report an issue or discuss promotion.
 sidebar: false
 aside: false
 ---
 
 # About Bujidao Backlink Directory
 
-Bujidao Backlink Directory collects platforms where you can submit SaaS, AI tools, and other global products. It helps you find relevant directories and launch communities. This is a directory of places to submit your product, not a catalog of tools to use.
+Bujidao Links helps product teams find platforms where they can submit a product link. Every listed platform must provide a product link submission or launch entry point; this is not a catalog of SaaS or AI tools for people to use.
 
-## Data verification
+Supported product formats include websites, apps, plugins, and desktop software. Each platform has its own accepted formats and eligibility rules, so check its official information before submitting.
 
-We prioritize official submission instructions, pricing pages, and help documents, and record when an entry was last checked. Fees, reciprocal-link requirements, backlink attributes, and indexability can change. Fields that cannot be confirmed are marked unknown. Domain Rating is shown only when its source can be traced.
+## Sources and verification
 
-The directory covers product launch communities, software discovery directories, B2B software profiles, and AI-specific catalogs. We prioritize platforms with real product discovery use and verifiable official submission or profile-creation flows. Their audiences and eligibility rules differ, so a platform may not fit every product. There is no authoritative industry-wide “top ten backlink platforms” list; homepage picks are editorial selections, not a ranking.
+Platform details are based on official submission pages, listing policies, help centers, and pricing pages. Each listing links to the platform and its submission entry, along with details we could verify about fees, requirements, login, and backlinks. Fields that cannot currently be confirmed from official sources are omitted. The verification date indicates our latest check; platform policies can change.
 
-Each platform makes its own review and listing decisions. Directory information does not guarantee acceptance or SEO results; check the platform’s latest requirements before submitting.
+Domain Rating (DR) is sourced from Ahrefs. It describes a domain metric and does not indicate platform quality, acceptance likelihood, or SEO results from a submission. Each platform makes its own review and listing decisions. A listing here does not guarantee acceptance, traffic, or rankings.
 
-Popular picks on the homepage are editorial selections, not a live traffic ranking. Paid placements appear only when active campaigns exist and are labeled separately.
+## Feedback and partnerships
 
-## Feedback and contact
-
-Found a broken link, outdated detail, or want to discuss feedback or paid promotion? Contact [contact@itkdm.com](mailto:contact@itkdm.com).
+To report outdated information or a broken link, or to discuss paid promotion, contact [contact@itkdm.com](mailto:contact@itkdm.com).
 
 The site is currently available in Chinese and English.

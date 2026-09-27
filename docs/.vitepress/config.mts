@@ -3,12 +3,14 @@ import { createSeoHead } from './seo'
 import { directoryLinks } from './data/links'
 
 const siteUrl = process.env.SITE_URL
+const canonicalOrigin = new URL(siteUrl || 'https://apilaile.com').origin
 
 export default defineConfig({
   lang: 'zh-CN',
   title: '布吉岛外链导航',
   description: '查找可提交出海 SaaS、AI 工具和互联网产品的平台目录与发布社区。',
   cleanUrls: true,
+  sitemap: { hostname: canonicalOrigin },
   lastUpdated: true,
   head: [
     ['meta', { name: 'theme-color', content: '#f6f7f2' }],
@@ -47,7 +49,6 @@ export default defineConfig({
         ],
         sidebar: {
           '/directory/': [{ text: '广场', items: [{ text: '全部平台', link: '/directory/' }] }],
-          '/blog/': [{ text: '博客', items: [{ text: '概览', link: '/blog/' }] }],
           '/about': [{ text: '关于', items: [{ text: '概览', link: '/about' }] }]
         },
         outline: { label: '本页目录', level: [2, 3] },
@@ -73,7 +74,6 @@ export default defineConfig({
         ],
         sidebar: {
           '/en/directory/': [{ text: 'Directory', items: [{ text: 'All platforms', link: '/en/directory/' }] }],
-          '/en/blog/': [{ text: 'Blog', items: [{ text: 'Overview', link: '/en/blog/' }] }],
           '/en/about': [{ text: 'About', items: [{ text: 'Overview', link: '/en/about' }] }]
         },
         outline: { label: 'On this page', level: [2, 3] },

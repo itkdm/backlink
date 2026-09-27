@@ -136,6 +136,8 @@
 .site-detail-fee-note { margin: 15px 0 0; color: var(--vp-c-text-2); font-size: 12px; line-height: 1.75; }
 .site-detail-source { margin: 8px 0 0; font-size: 12px; }
 .site-detail-source a { color: var(--vp-c-brand-1); text-decoration: underline; text-underline-offset: 3px; }
+.site-detail-source-list { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; padding: 0; }
+.site-detail-source-list a { color: var(--vp-c-brand-1); text-decoration: underline; text-underline-offset: 3px; }
 .site-detail-tags { display: flex; flex-wrap: wrap; gap: 7px; }
 .site-detail-tags span { padding: 5px 9px; border-radius: 5px; background: var(--vp-c-bg-soft); color: var(--vp-c-text-2); font-size: 11px; }
 .site-detail-section ul { margin: 0; padding-left: 19px; color: var(--vp-c-text-2); font-size: 12px; line-height: 1.8; }

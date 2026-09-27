@@ -27,8 +27,8 @@ function pagePath(relativePath: string) {
 
 function pageKind(relativePath: string) {
   if (relativePath === 'index.md' || relativePath === 'en/index.md') return 'website'
-  if (relativePath.endsWith('/index.md')) return 'section'
-  return 'article'
+  if (relativePath.endsWith('/index.md')) return 'collection'
+  return 'webpage'
 }
 
 function localizedPaths(relativePath: string) {
@@ -44,7 +44,7 @@ export function createSeoHead({ pageData, siteData, title, description, siteUrl 
   const frontmatter = pageData.frontmatter
   const kind = pageKind(pageData.relativePath)
   const head: HeadConfig[] = [
-    ['meta', { property: 'og:type', content: kind === 'article' ? 'article' : 'website' }],
+    ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: siteData.title }],
     ['meta', { property: 'og:locale', content: siteData.lang.replace('-', '_') }],
     ['meta', { property: 'og:title', content: title }],
@@ -85,13 +85,13 @@ export function createSeoHead({ pageData, siteData, title, description, siteUrl 
       })
     ])
   } else {
+    const schemaType = kind === 'collection' ? 'CollectionPage' : 'WebPage'
     head.push([
       'script',
       { type: 'application/ld+json' },
       JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': kind === 'article' ? 'Article' : 'CollectionPage',
-        headline: title,
+        '@type': schemaType,
         name: title,
         description: description || siteData.description,
         url: canonicalUrl,

@@ -94,7 +94,7 @@ function openDetails(id: string) {
           <input ref="searchInput" v-model="query" type="search" :placeholder="text.search" :aria-label="text.search">
           <kbd>/</kbd>
         </label>
-        <img class="directory-search-mascot" src="/backlink-search-mascot.png" alt="" aria-hidden="true">
+        <img class="directory-search-mascot" src="/backlink-search-mascot.webp" alt="" aria-hidden="true">
       </div>
       <div class="fee-filters" role="group" :aria-label="text.fee">
         <button :class="{ active: activeFee === 'all' }" @click="activeFee = 'all'">{{ text.allFees }}</button>
