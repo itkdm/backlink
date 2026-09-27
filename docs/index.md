@@ -1,5 +1,5 @@
 ---
-title: 布吉岛外链导航｜产品链接提交平台目录
+title: 外链提交平台导航｜网站、APP 与软件收录
 description: 查找接受网站、APP、插件和桌面软件投稿的海外平台，了解提交条件并直达官方入口。
 layout: home
 hero:

@@ -86,7 +86,7 @@ function openDetails(id: string) {
     <div class="directory-controls">
       <div class="directory-search-scene">
         <header class="directory-search-intro">
-          <h2>{{ text.label }}</h2>
+          <h1>{{ text.label }}</h1>
           <p>{{ text.introduction }} <a href="https://ahrefs.com/" target="_blank" rel="noopener noreferrer">Domain Rating by Ahrefs</a></p>
         </header>
         <label class="directory-search">
@@ -114,7 +114,7 @@ function openDetails(id: string) {
         <div class="card-topline">
           <span class="site-logo-fallback" aria-hidden="true">{{ link.name[locale].slice(0, 1) }}</span>
           <img class="site-logo" :src="favicon(link.homepageUrl, link.logoUrl)" :alt="''" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
-          <h3 :title="link.name[locale] || link.homepageUrl">{{ link.name[locale] || link.homepageUrl }}</h3>
+          <h3 :title="link.name[locale] || link.homepageUrl"><a class="directory-card-title-link" :href="`${locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`" @click.stop>{{ link.name[locale] || link.homepageUrl }}</a></h3>
           <span v-if="link.featured" class="featured-pill">{{ text.featured }}</span>
           <span v-if="link.domainRating" class="dr-badge" :style="domainRatingStyle(link.domainRating.value)" :title="text.dr"><strong>{{ link.domainRating.value }}</strong><small>DR</small></span>
         </div>

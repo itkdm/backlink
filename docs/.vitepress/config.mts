@@ -3,18 +3,19 @@ import { createSeoHead } from './seo'
 import { directoryLinks } from './data/links'
 
 const siteUrl = process.env.SITE_URL
-const canonicalOrigin = new URL(siteUrl || 'https://apilaile.com').origin
+const siteOrigin = new URL(siteUrl || 'https://apilaile.com').origin
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: '布吉岛外链导航',
+  title: '布吉岛外链提交导航',
   description: '查找可提交出海 SaaS、AI 工具和互联网产品的平台目录与发布社区。',
   cleanUrls: true,
-  sitemap: { hostname: canonicalOrigin },
+  sitemap: { hostname: siteOrigin },
   lastUpdated: true,
   head: [
     ['meta', { name: 'theme-color', content: '#f6f7f2' }],
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    ['link', { rel: 'describedby', href: '/llms.txt' }]
   ],
   transformHead({ pageData, siteData, title, description }) {
     return createSeoHead({ pageData, siteData, title, description, siteUrl })
@@ -38,10 +39,10 @@ export default defineConfig({
     root: {
       label: '简体中文',
       lang: 'zh-CN',
-      title: '布吉岛外链导航',
+      title: '布吉岛外链提交导航',
       description: '查找可提交出海 SaaS、AI 工具和互联网产品的平台目录与发布社区。',
       themeConfig: {
-        siteTitle: '布吉岛外链导航',
+        siteTitle: '布吉岛外链提交导航',
         nav: [
           { text: '首页', link: '/' },
           { text: '广场', link: '/directory/' },
@@ -54,6 +55,13 @@ export default defineConfig({
         outline: { label: '本页目录', level: [2, 3] },
         docFooter: { prev: '上一篇', next: '下一篇' },
         lastUpdated: { text: '最后更新于' },
+        notFound: {
+          code: '404',
+          title: '页面未找到',
+          quote: '这个页面可能已移除，或地址输入有误。你可以返回首页继续浏览。',
+          linkText: '返回首页',
+          linkLabel: '返回布吉岛首页'
+        },
         footer: {
           message: '发现好网站，让每一次探索都有方向。',
           copyright: 'Copyright © 2026 布吉岛'
@@ -63,10 +71,10 @@ export default defineConfig({
     en: {
       label: 'English',
       lang: 'en-US',
-      title: 'Bujidao Link Directory',
+      title: 'Bujidao Product Submission Directory',
       description: 'Find directories and launch communities where you can submit SaaS, AI tools, and internet products.',
       themeConfig: {
-        siteTitle: 'Bujidao Links',
+        siteTitle: 'Bujidao Submission Directory',
         nav: [
           { text: 'Home', link: '/en/' },
           { text: 'Directory', link: '/en/directory/' },
@@ -79,6 +87,13 @@ export default defineConfig({
         outline: { label: 'On this page', level: [2, 3] },
         docFooter: { prev: 'Previous', next: 'Next' },
         lastUpdated: { text: 'Last updated' },
+        notFound: {
+          code: '404',
+          title: 'Page not found',
+          quote: 'This page may have moved, or the address may be incorrect. Return home to keep exploring.',
+          linkText: 'Return home',
+          linkLabel: 'Return to the Bujidao homepage'
+        },
         footer: {
           message: 'Find useful websites. Make every exploration count.',
           copyright: 'Copyright © 2026 Bujidao'
@@ -88,6 +103,6 @@ export default defineConfig({
   },
   themeConfig: {
     logo: '/favicon.svg',
-    siteTitle: '布吉岛外链导航'
+    siteTitle: '布吉岛外链提交导航'
   }
 })

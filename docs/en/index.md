@@ -1,5 +1,5 @@
 ---
-title: Bujidao Links | Product Submission Platform Directory
+title: Product Submission Directory | Websites, Apps & Software
 description: Find platforms accepting website, app, plugin, and desktop software submissions, review their requirements, and open official submission pages.
 layout: home
 hero:

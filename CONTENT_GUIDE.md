@@ -4,6 +4,12 @@
 
 每个公开页面填写唯一的 `title` 和准确的 `description`。Canonical、Open Graph、Twitter Card 和结构化数据由 `docs/.vitepress/seo.ts` 集中生成。
 
+中英文页面共用不含文字的 `docs/public/og-share-v2.jpg`（1200 × 630）；`og:title`、`og:description` 和图片替代文本按页面语言生成。不要把页面标题烘焙进分享图。
+
+## 站点级 SEO
+
+VitePress 内建 sitemap 由 `docs/.vitepress/config.mts` 中的 `sitemap.hostname` 启用。`docs/public/robots.txt` 允许通用爬虫、搜索爬虫和 AI 搜索/训练爬虫访问，并声明 sitemap。`docs/public/llms.txt` 只维护人工精选的核心入口，不复制全站 sitemap；站点 head 通过 `rel="describedby"` 提供发现入口。
+
 除非确有需要，不添加 `keywords`、虚构的 `date` 或重复的 `author`。正式站点域名为 `https://apilaile.com`，构建时通过 `SITE_URL` 注入。
 
 ## 产品提交平台条目

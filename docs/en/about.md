@@ -1,5 +1,5 @@
 ---
-title: About Bujidao Links | Submission Coverage and Data Sources
+title: About the Submission Directory | Coverage and Data Sources
 description: Learn which product submission platforms Bujidao lists, how platform details are checked, and how to report an issue or discuss promotion.
 sidebar: false
 aside: false

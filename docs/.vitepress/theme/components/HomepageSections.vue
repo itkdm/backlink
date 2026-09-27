@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRouter } from 'vitepress'
 import { backlinkLabels, directoryLinks, domainRatingStyle, feeLabels, loginRequirementLabels, paidPromotions, type LinkLanguage } from '../../data/links'
+import HomepageFaq from './HomepageFaq.vue'
 
 const props = defineProps<{ locale: LinkLanguage }>()
 const router = useRouter()
@@ -34,7 +35,7 @@ function favicon(homepageUrl: string, logoUrl?: string) {
           <div class="home-popular-card-top">
             <span class="home-logo-fallback" aria-hidden="true">{{ link.name[props.locale].slice(0, 1) }}</span>
             <img class="home-logo" :src="favicon(link.homepageUrl, link.logoUrl)" alt="" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
-            <h3 :title="link.name[props.locale] || link.homepageUrl">{{ link.name[props.locale] || link.homepageUrl }}</h3>
+            <h3 :title="link.name[props.locale] || link.homepageUrl"><a class="home-card-title-link" :href="`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`" @click.stop>{{ link.name[props.locale] || link.homepageUrl }}</a></h3>
             <span v-if="link.domainRating" class="home-dr" :style="domainRatingStyle(link.domainRating.value)"><strong>{{ link.domainRating.value }}</strong><small>DR</small></span>
           </div>
           <p class="home-card-description" :title="link.description[props.locale]">{{ link.description[props.locale] || (props.locale === 'zh' ? '暂无简介' : 'Description unavailable') }}</p>
@@ -69,5 +70,7 @@ function favicon(homepageUrl: string, logoUrl?: string) {
         </article>
       </div>
     </section>
+
+    <HomepageFaq :locale="props.locale" />
   </div>
 </template>
