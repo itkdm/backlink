@@ -64,8 +64,7 @@ const filteredLinks = computed(() => {
       return value !== undefined && value >= minimum && value <= maximum
     })()
     const values = [link.name[locale.value], link.description[locale.value], link.homepageUrl, link.submissionUrl,
-      link.feeSummary[locale.value], ...link.requirements.map((item) => item[locale.value]),
-      ...link.accepts.map((type) => productTypeLabels[locale.value][type])]
+      link.searchText[locale.value], ...link.accepts.map((type) => productTypeLabels[locale.value][type])]
     const matchesQuery = !normalizedQuery || values.some((value) => value.toLowerCase().includes(normalizedQuery))
     return matchesProductType && matchesFee && matchesDr && matchesQuery
   })
@@ -129,7 +128,7 @@ function openDetails(id: string) {
           <div class="card-badges">
             <span v-for="fee in link.feeModels" :key="fee" class="fee-badge">{{ feeLabels[locale][fee] }}</span>
             <span v-if="link.backlinkRel !== 'unknown'" class="rel-badge">{{ backlinkLabels[locale][link.backlinkRel] }}</span>
-            <span v-if="link.loginRequirement !== 'unknown'" class="rel-badge" :title="link.loginNote?.[locale]">{{ loginRequirementLabels[locale][link.loginRequirement] }}</span>
+            <span v-if="link.loginRequirement !== 'unknown'" class="rel-badge">{{ loginRequirementLabels[locale][link.loginRequirement] }}</span>
           </div>
           <a class="directory-card-link" :href="link.homepageUrl" target="_blank" rel="noopener noreferrer" @click.stop>{{ locale === 'zh' ? '进入平台' : 'Visit platform' }} <span aria-hidden="true">↗</span></a>
         </div>

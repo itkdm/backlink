@@ -1,6 +1,5 @@
 import { defineConfig, type HeadConfig } from 'vitepress'
 import { createSeoHead } from './seo'
-import { directoryLinks } from './data/links'
 
 const siteUrl = process.env.SITE_URL
 const siteOrigin = new URL(siteUrl || 'https://apilaile.com').origin
@@ -17,6 +16,7 @@ export default defineConfig({
   title: '布吉岛外链提交导航',
   description: '查找可提交出海 SaaS、AI 工具和互联网产品的平台目录与发布社区。',
   cleanUrls: true,
+  srcExclude: ['platform-records/**/*.md'],
   sitemap: { hostname: siteOrigin },
   lastUpdated: true,
   head: [
@@ -30,18 +30,11 @@ export default defineConfig({
     return createSeoHead({ pageData, siteData, title, description, siteUrl })
   },
   transformPageData(pageData) {
-    const id = pageData.params?.id
-    const link = directoryLinks.find((item) => item.id === id)
-    if (!link || !pageData.filePath.includes('directory/[id].md')) return
-
-    const isEnglish = pageData.filePath.startsWith('en/')
-    const name = link.name[isEnglish ? 'en' : 'zh']
-    const description = link.description[isEnglish ? 'en' : 'zh']
+    const params = pageData.params as { seoTitle?: string; seoDescription?: string } | undefined
+    if (!pageData.filePath.includes('directory/[id].md') || !params?.seoTitle || !params.seoDescription) return
     return {
-      title: isEnglish ? `${name} Submission Site` : `${name} 提交平台`,
-      description: isEnglish
-        ? `${description} View its fees, requirements, review process, and backlink details.`
-        : `${description} 查看${name}的费用、提交要求、审核方式和外链信息。`
+      title: params.seoTitle,
+      description: params.seoDescription
     }
   },
   locales: {

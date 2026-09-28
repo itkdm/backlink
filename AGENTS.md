@@ -20,9 +20,9 @@
 
 - 中文默认路由位于 `docs/`，英文位于 `docs/en/`；VitePress locale 配置统一位于 `docs/.vitepress/config.mts`。
 - 首页 `/` 仅展示品牌首屏、人工精选的热门平台，以及有付费推广条目时才显示的广告区；完整搜索筛选广场位于 `/directory/`，英文对应 `/en/directory/`。顶部主导航是“广场、博客、关于”。
-- 平台详情页由 `docs/directory/[id].md` 和 `docs/en/directory/[id].md` 的动态路由生成，URL 为 `/directory/<id>` 和 `/en/directory/<id>`；新增平台时由对应的 `[id].paths.ts` 从目录数据生成路由。
+- 平台详情页由 `docs/directory/[id].md` 和 `docs/en/directory/[id].md` 的动态路由生成，URL 为 `/directory/<id>` 和 `/en/directory/<id>`；平台内容来自 `docs/platform-records/<id>.md`，两个 locale 的 `[id].paths.ts` 自动生成详情路由并注入对应语言正文。
 - 未来新增语言时，在 `docs/<locale>/` 添加对应页面，并在 VitePress `locales` 中登记语言、标题、描述和导航。
-- 产品提交平台数据集中在 `docs/.vitepress/data/links.ts`。每条链接需对应真实的提交入口，提供准确的分类、中英文标题与简介、有效 URL；不要收录仅供用户使用的普通 SaaS 或 AI 产品。
+- 每个平台使用 `docs/platform-records/<id>.md` 单独维护，frontmatter 保存目录筛选字段与中英文 SEO 标题/描述，正文用 `<!-- locale:zh -->` 和 `<!-- locale:en -->` 分隔并引用官方来源。由 `docs/platforms.data.ts` 和 `docs/.vitepress/data/platform-records.ts` 构建时读取、校验；字段类型和分类标签分别维护在 `.vitepress/data/directory-types.ts`、`links.ts`。不要把平台记录写回代码，也不要收录仅供用户使用的普通 SaaS 或 AI 产品。
 - 页面 frontmatter 必须包含唯一 `title` 与准确的 `description`。SEO head 标签集中在 `docs/.vitepress/seo.ts`。
 - 首页分享图统一位于 `docs/public/social/default-share.jpg`；SVG favicon 同时提供 128 × 128 PNG fallback。
 - 正式域名为 `https://apilaile.com`。GitHub Actions 构建可通过 `SITE_URL` 注入正式域名；本地默认不生成依赖域名的标签。

@@ -47,7 +47,7 @@ function logoAlt(name: string) {
             <div class="home-card-meta">
               <span v-for="fee in link.feeModels" :key="fee">{{ feeLabels[props.locale][fee] }}</span>
               <span v-if="link.backlinkRel !== 'unknown'" :title="`${copy.backlink} · ${backlinkLabels[props.locale][link.backlinkRel]}`">{{ copy.backlink }} · {{ backlinkLabels[props.locale][link.backlinkRel] }}</span>
-              <span v-if="link.loginRequirement !== 'unknown'" :title="link.loginNote?.[props.locale]">{{ loginRequirementLabels[props.locale][link.loginRequirement] }}</span>
+              <span v-if="link.loginRequirement !== 'unknown'">{{ loginRequirementLabels[props.locale][link.loginRequirement] }}</span>
             </div>
             <a class="home-card-link" :href="link.homepageUrl" target="_blank" rel="noopener noreferrer" @click.stop>{{ copy.website }} <span aria-hidden="true">↗</span></a>
           </div>

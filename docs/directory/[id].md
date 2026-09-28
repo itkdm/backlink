@@ -13,3 +13,5 @@ import DirectoryDetail from '../.vitepress/theme/components/DirectoryDetail.vue'
 </script>
 
 <DirectoryDetail :id="$params.id" locale="zh" />
+
+<!-- @content -->
