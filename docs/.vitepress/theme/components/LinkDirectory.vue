@@ -29,6 +29,7 @@ const text = computed(() => props.locale === 'zh'
   ? {
       search: '搜索平台、产品类型或要求…', allFees: '全部费用', submissionTypes: '收录类型', allProductTypes: '全部收录类型',
       empty: '没有找到匹配的提交平台，换个关键词试试。', label: '产品提交平台', featured: '推荐入口',
+      searchMascotAlt: '插画人物正在查找产品提交平台。',
       fee: '费用', dr: 'DR', drRange: 'DR 区间', allDr: '全部 DR',
       introduction: '费用、审核、外链与收录状态可能变化，请以平台当前页面为准。',
       note: '外链属性和收录状态仅在有可靠依据时记录；DR 不代表外链效果或排名保证。'
@@ -36,6 +37,7 @@ const text = computed(() => props.locale === 'zh'
   : {
       search: 'Search platforms, product types, or requirements…', allFees: 'All fee types', submissionTypes: 'Accepted formats', allProductTypes: 'All formats',
       empty: 'No matching submission platforms. Try another search.', label: 'Product submission platforms', featured: 'Featured',
+      searchMascotAlt: 'An illustration of a person searching for product submission platforms.',
       fee: 'Fee', dr: 'DR', drRange: 'DR range', allDr: 'All DR',
       introduction: 'Fees, review, backlink, and listing status may change. Check each platform’s current page.',
       note: 'Backlink attributes and indexability are recorded only when reliable evidence is available. DR does not guarantee link impact or rankings.'
@@ -75,6 +77,10 @@ function favicon(url: string, logoUrl?: string) {
   catch { return '' }
 }
 
+function platformLogoAlt(name: string) {
+  return props.locale === 'zh' ? `${name} 平台标志` : `${name} platform logo`
+}
+
 function openDetails(id: string) {
   router.go(`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${id}`)
 }
@@ -94,7 +100,7 @@ function openDetails(id: string) {
           <input ref="searchInput" v-model="query" type="search" :placeholder="text.search" :aria-label="text.search">
           <kbd>/</kbd>
         </label>
-        <img class="directory-search-mascot" src="/backlink-search-mascot.webp" alt="" aria-hidden="true">
+        <img class="directory-search-mascot" src="/backlink-search-mascot.webp" :alt="text.searchMascotAlt">
       </div>
       <div class="fee-filters" role="group" :aria-label="text.fee">
         <button :class="{ active: activeFee === 'all' }" @click="activeFee = 'all'">{{ text.allFees }}</button>
@@ -113,7 +119,7 @@ function openDetails(id: string) {
       <article v-for="(link, index) in filteredLinks" :key="link.id" class="directory-card" :style="{ '--card-index': index }" role="link" tabindex="0" @click="openDetails(link.id)" @keydown.enter.self="openDetails(link.id)">
         <div class="card-topline">
           <span class="site-logo-fallback" aria-hidden="true">{{ link.name[locale].slice(0, 1) }}</span>
-          <img class="site-logo" :src="favicon(link.homepageUrl, link.logoUrl)" :alt="''" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
+          <img class="site-logo" :src="favicon(link.homepageUrl, link.logoUrl)" :alt="platformLogoAlt(link.name[locale])" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
           <h3 :title="link.name[locale] || link.homepageUrl"><a class="directory-card-title-link" :href="`${locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`" @click.stop>{{ link.name[locale] || link.homepageUrl }}</a></h3>
           <span v-if="link.featured" class="featured-pill">{{ text.featured }}</span>
           <span v-if="link.domainRating" class="dr-badge" :style="domainRatingStyle(link.domainRating.value)" :title="text.dr"><strong>{{ link.domainRating.value }}</strong><small>DR</small></span>

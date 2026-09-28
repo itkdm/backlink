@@ -24,6 +24,10 @@ function favicon(homepageUrl: string, logoUrl?: string) {
   if (logoUrl) return logoUrl
   try { return `${new URL(homepageUrl).origin}/favicon.ico` } catch { return '' }
 }
+
+function logoAlt(name: string) {
+  return props.locale === 'zh' ? `${name} 平台标志` : `${name} platform logo`
+}
 </script>
 
 <template>
@@ -32,7 +36,7 @@ function favicon(homepageUrl: string, logoUrl?: string) {
     <header class="site-detail-header">
       <div class="site-detail-logo-wrap">
         <span class="site-detail-logo-fallback" aria-hidden="true">{{ link.name[locale].slice(0, 1) }}</span>
-        <img class="site-detail-logo" :src="favicon(link.homepageUrl, link.logoUrl)" alt="" @error="($event.target as HTMLImageElement).style.display = 'none'">
+        <img class="site-detail-logo" :src="favicon(link.homepageUrl, link.logoUrl)" :alt="logoAlt(link.name[locale])" @error="($event.target as HTMLImageElement).style.display = 'none'">
       </div>
       <div class="site-detail-title">
         <p class="directory-eyebrow">{{ copy.platform }}</p>

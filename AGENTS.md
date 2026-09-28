@@ -24,6 +24,7 @@
 - 未来新增语言时，在 `docs/<locale>/` 添加对应页面，并在 VitePress `locales` 中登记语言、标题、描述和导航。
 - 产品提交平台数据集中在 `docs/.vitepress/data/links.ts`。每条链接需对应真实的提交入口，提供准确的分类、中英文标题与简介、有效 URL；不要收录仅供用户使用的普通 SaaS 或 AI 产品。
 - 页面 frontmatter 必须包含唯一 `title` 与准确的 `description`。SEO head 标签集中在 `docs/.vitepress/seo.ts`。
+- 首页分享图统一位于 `docs/public/social/default-share.jpg`；SVG favicon 同时提供 128 × 128 PNG fallback。
 - 正式域名为 `https://apilaile.com`。GitHub Actions 构建可通过 `SITE_URL` 注入正式域名；本地默认不生成依赖域名的标签。
 - 不要编造发布日期、作者或站点背书；外链使用 `target="_blank"` 时必须带 `rel="noopener noreferrer"`。
 

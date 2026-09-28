@@ -67,9 +67,9 @@ export function createSeoHead({ pageData, siteData, title, description, siteUrl 
   head.push(
     ['link', { rel: 'canonical', href: canonicalUrl }],
     ['meta', { property: 'og:url', content: canonicalUrl }],
-    ['meta', { property: 'og:image', content: new URL('/og-share-v2.jpg', origin).toString() }],
+    ['meta', { property: 'og:image', content: new URL('/social/default-share.jpg', origin).toString() }],
     ['meta', { property: 'og:image:alt', content: socialImageAlt }],
-    ['meta', { name: 'twitter:image', content: new URL('/og-share-v2.jpg', origin).toString() }],
+    ['meta', { name: 'twitter:image', content: new URL('/social/default-share.jpg', origin).toString() }],
     ['meta', { name: 'twitter:image:alt', content: socialImageAlt }]
   )
 

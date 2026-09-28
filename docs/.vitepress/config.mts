@@ -15,6 +15,7 @@ export default defineConfig({
   head: [
     ['meta', { name: 'theme-color', content: '#f6f7f2' }],
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '128x128', href: '/favicon.png' }],
     ['link', { rel: 'describedby', href: '/llms.txt' }]
   ],
   transformHead({ pageData, siteData, title, description }) {
@@ -42,6 +43,7 @@ export default defineConfig({
       title: '布吉岛外链提交导航',
       description: '查找可提交出海 SaaS、AI 工具和互联网产品的平台目录与发布社区。',
       themeConfig: {
+        logo: { src: '/favicon.svg', alt: '布吉岛外链提交导航标志' },
         siteTitle: '布吉岛外链提交导航',
         nav: [
           { text: '首页', link: '/' },
@@ -74,6 +76,7 @@ export default defineConfig({
       title: 'Bujidao Product Submission Directory',
       description: 'Find directories and launch communities where you can submit SaaS, AI tools, and internet products.',
       themeConfig: {
+        logo: { src: '/favicon.svg', alt: 'Bujidao product submission directory logo' },
         siteTitle: 'Bujidao Submission Directory',
         nav: [
           { text: 'Home', link: '/en/' },
@@ -102,7 +105,7 @@ export default defineConfig({
     }
   },
   themeConfig: {
-    logo: '/favicon.svg',
+    logo: { src: '/favicon.svg', alt: '布吉岛外链提交导航标志' },
     siteTitle: '布吉岛外链提交导航'
   }
 })

@@ -16,6 +16,10 @@ function favicon(homepageUrl: string, logoUrl?: string) {
   try { return `${new URL(homepageUrl).origin}/favicon.ico` } catch { return '' }
 }
 
+function logoAlt(name: string) {
+  return props.locale === 'zh' ? `${name} 品牌标志` : `${name} brand logo`
+}
+
 </script>
 
 <template>
@@ -34,7 +38,7 @@ function favicon(homepageUrl: string, logoUrl?: string) {
         <article v-for="link in popularLinks" :key="link.id" class="home-popular-card" role="link" tabindex="0" @click="router.go(`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`)" @keydown.enter.self="router.go(`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`)">
           <div class="home-popular-card-top">
             <span class="home-logo-fallback" aria-hidden="true">{{ link.name[props.locale].slice(0, 1) }}</span>
-            <img class="home-logo" :src="favicon(link.homepageUrl, link.logoUrl)" alt="" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
+            <img class="home-logo" :src="favicon(link.homepageUrl, link.logoUrl)" :alt="logoAlt(link.name[props.locale])" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
             <h3 :title="link.name[props.locale] || link.homepageUrl"><a class="home-card-title-link" :href="`${props.locale === 'zh' ? '/directory/' : '/en/directory/'}${link.id}`" @click.stop>{{ link.name[props.locale] || link.homepageUrl }}</a></h3>
             <span v-if="link.domainRating" class="home-dr" :style="domainRatingStyle(link.domainRating.value)"><strong>{{ link.domainRating.value }}</strong><small>DR</small></span>
           </div>
@@ -64,7 +68,7 @@ function favicon(homepageUrl: string, logoUrl?: string) {
         <article v-for="promotion in paidPromotions" :key="promotion.id" class="home-ad-card">
           <span class="home-ad-badge">{{ copy.ad }}</span>
           <span class="home-logo-fallback" aria-hidden="true">{{ promotion.name[props.locale].slice(0, 1) }}</span>
-          <img class="home-logo" :src="promotion.logoUrl || favicon(promotion.url)" alt="" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
+          <img class="home-logo" :src="promotion.logoUrl || favicon(promotion.url)" :alt="logoAlt(promotion.name[props.locale])" loading="lazy" @error="($event.target as HTMLImageElement).style.display = 'none'">
           <div class="home-ad-content"><h3>{{ promotion.name[props.locale] }}</h3><p>{{ promotion.description[props.locale] }}</p></div>
           <a :href="promotion.url" target="_blank" rel="noopener noreferrer">{{ copy.website }} ↗</a>
         </article>

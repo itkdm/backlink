@@ -4,7 +4,7 @@
 
 每个公开页面填写唯一的 `title` 和准确的 `description`。Canonical、Open Graph、Twitter Card 和结构化数据由 `docs/.vitepress/seo.ts` 集中生成。
 
-中英文页面共用不含文字的 `docs/public/og-share-v2.jpg`（1200 × 630）；`og:title`、`og:description` 和图片替代文本按页面语言生成。不要把页面标题烘焙进分享图。
+中英文页面共用不含文字的 `docs/public/social/default-share.jpg`（1200 × 630）；`og:title`、`og:description` 和图片替代文本按页面语言生成。不要把页面标题烘焙进分享图。
 
 ## 站点级 SEO
 
