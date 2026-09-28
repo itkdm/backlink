@@ -1,5 +1,5 @@
 ---
-title: Product Submission Directory | Websites, Apps & Software
+title: Search Product Submission Platforms | Fees, Formats & DR
 description: Search platforms for submitting websites, apps, plugins, and desktop software. Compare fees and DR ranges, with verified submission details.
 sidebar: false
 aside: false
