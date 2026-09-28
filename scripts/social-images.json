@@ -1,0 +1,27 @@
+{
+  "brand": {
+    "zh": "布吉岛外链提交导航",
+    "en": "Bujidao Submission Directory"
+  },
+  "pages": [
+    {
+      "source": "docs/directory/index.md",
+      "background": "docs/public/social/backgrounds/directory.jpg",
+      "output": "/social/categories/directory-zh.jpg",
+      "locale": "zh"
+    },
+    {
+      "source": "docs/en/directory/index.md",
+      "background": "docs/public/social/backgrounds/directory.jpg",
+      "output": "/social/categories/directory-en.jpg",
+      "locale": "en"
+    }
+  ],
+  "palette": {
+    "brand": "#245c44",
+    "accent": "#8dbb55",
+    "title": "#20342f",
+    "description": "#55615c",
+    "wash": "#fffdf8"
+  }
+}

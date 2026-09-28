@@ -61,15 +61,18 @@ export function createSeoHead({ pageData, siteData, title, description, siteUrl 
   if (!origin || isNotFoundPage) return head
 
   const canonicalUrl = new URL(pagePath(pageData.relativePath), origin).toString()
-  const socialImageAlt = pageData.relativePath.startsWith('en/')
-    ? 'Illustration of a directory listing product launch and submission platforms'
-    : '插画：收录产品发布与提交平台的目录卡片和链接'
+  const socialImagePath = typeof frontmatter.ogImage === 'string' ? frontmatter.ogImage : '/social/default-share.jpg'
+  const socialImageAlt = typeof frontmatter.ogImageAlt === 'string'
+    ? frontmatter.ogImageAlt
+    : pageData.relativePath.startsWith('en/')
+      ? 'Product submission directory sharing image with platform listings and link illustration'
+      : '产品提交平台目录分享图，呈现平台列表与链接插画'
   head.push(
     ['link', { rel: 'canonical', href: canonicalUrl }],
     ['meta', { property: 'og:url', content: canonicalUrl }],
-    ['meta', { property: 'og:image', content: new URL('/social/default-share.jpg', origin).toString() }],
+    ['meta', { property: 'og:image', content: new URL(socialImagePath, origin).toString() }],
     ['meta', { property: 'og:image:alt', content: socialImageAlt }],
-    ['meta', { name: 'twitter:image', content: new URL('/social/default-share.jpg', origin).toString() }],
+    ['meta', { name: 'twitter:image', content: new URL(socialImagePath, origin).toString() }],
     ['meta', { name: 'twitter:image:alt', content: socialImageAlt }]
   )
 
@@ -105,6 +108,7 @@ export function createSeoHead({ pageData, siteData, title, description, siteUrl 
         description: description || siteData.description,
         url: canonicalUrl,
         inLanguage: siteData.lang,
+        image: new URL(socialImagePath, origin).toString(),
         isPartOf: { '@type': 'WebSite', name: siteData.title, url: origin }
       })
     ])
