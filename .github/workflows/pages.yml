@@ -52,6 +52,7 @@ jobs:
         run: pnpm docs:build
         env:
           SITE_URL: https://apilaile.com
+          GA_MEASUREMENT_ID: G-DDTCL1CHFZ
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
