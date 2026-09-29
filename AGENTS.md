@@ -22,7 +22,7 @@
 - 首页 `/` 仅展示品牌首屏、人工精选的热门平台，以及有付费推广条目时才显示的广告区；完整搜索筛选广场位于 `/directory/`，英文对应 `/en/directory/`。顶部主导航是“广场、博客、关于”。
 - 平台详情页由 `docs/directory/[id].md` 和 `docs/en/directory/[id].md` 的动态路由生成，URL 为 `/directory/<id>` 和 `/en/directory/<id>`；平台内容来自 `docs/platform-records/<id>.md`，两个 locale 的 `[id].paths.ts` 自动生成详情路由并注入对应语言正文。
 - 未来新增语言时，在 `docs/<locale>/` 添加对应页面，并在 VitePress `locales` 中登记语言、标题、描述和导航。
-- 每个平台使用 `docs/platform-records/<id>.md` 单独维护，frontmatter 保存目录筛选字段与中英文 SEO 标题/描述，正文用 `<!-- locale:zh -->` 和 `<!-- locale:en -->` 分隔并引用官方来源。由 `docs/platforms.data.ts` 和 `docs/.vitepress/data/platform-records.ts` 构建时读取、校验；字段类型和分类标签分别维护在 `.vitepress/data/directory-types.ts`、`links.ts`。不要把平台记录写回代码，也不要收录仅供用户使用的普通 SaaS 或 AI 产品。
+- 每个平台使用 `docs/platform-records/<id>.md` 单独维护，frontmatter 保存目录筛选字段与中英文 SEO 标题/描述，正文用 `<!-- locale:zh -->` 和 `<!-- locale:en -->` 分隔并引用官方来源。由 `docs/platforms.data.ts` 和 `docs/.vitepress/data/platform-records.ts` 构建时读取、校验；字段类型和分类标签分别维护在 `.vitepress/data/directory-types.ts`、`links.ts`。费用未核实时 `feeModels` 可留空，界面不会显示费用标签；不要为了填值猜测免费或收费。不要把平台记录写回代码，也不要收录仅供用户使用的普通 SaaS 或 AI 产品。
 - Ahrefs DR 域名以这些 Markdown 记录中的 `homepageUrl` 为准。`docs/.vitepress/data/platform-record-source.mjs` 是构建与 `pnpm dr:sync` 共用的记录读取器；调整平台数据结构时保持共用，不要再从 `links.ts` 提取域名。部署工作流会在构建前同步 DR，要求配置 GitHub Actions secret `AHREFS_API_KEY`；本地可用 `.env` 中的同名变量运行 `pnpm dr:sync`。
 - 页面 frontmatter 必须包含唯一 `title` 与准确的 `description`。SEO head 标签集中在 `docs/.vitepress/seo.ts`。
 - 首页分享图统一位于 `docs/public/social/default-share.jpg`；SVG favicon 同时提供 128 × 128 PNG fallback。

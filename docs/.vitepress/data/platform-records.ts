@@ -53,8 +53,10 @@ function enumValue<T extends string>(value: unknown, values: readonly T[], path:
   return value as T
 }
 
-function enumArray<T extends string>(value: unknown, values: readonly T[], path: string, file: string): T[] {
-  if (!Array.isArray(value) || value.length === 0) fail(file, `${path} must be a non-empty array`)
+function enumArray<T extends string>(value: unknown, values: readonly T[], path: string, file: string, allowEmpty = false): T[] {
+  if (!Array.isArray(value) || (!allowEmpty && value.length === 0)) {
+    fail(file, `${path} must be ${allowEmpty ? 'an array' : 'a non-empty array'}`)
+  }
   return value.map((item, index) => enumValue(item, values, `${path}[${index}]`, file))
 }
 
@@ -95,7 +97,7 @@ function parseRecord(frontmatter: Record<string, unknown>, file: string): Platfo
     },
     homepageUrl: stringValue(frontmatter.homepageUrl, 'homepageUrl', file),
     submissionUrl: stringValue(frontmatter.submissionUrl, 'submissionUrl', file),
-    feeModels: enumArray(frontmatter.feeModels, feeModels, 'feeModels', file),
+    feeModels: enumArray(frontmatter.feeModels, feeModels, 'feeModels', file, true),
     loginRequirement: enumValue(frontmatter.loginRequirement, loginRequirements, 'loginRequirement', file),
     accepts: enumArray(frontmatter.accepts, productTypes, 'accepts', file),
     reviewMethod: enumValue(frontmatter.reviewMethod, reviewMethods, 'reviewMethod', file),
