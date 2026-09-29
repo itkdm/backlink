@@ -1,6 +1,5 @@
-import { readdirSync, readFileSync } from 'node:fs'
-import path from 'node:path'
 import type { ContentData } from 'vitepress'
+import { readPlatformRecordSources } from './platform-record-source.mjs'
 import type {
   BacklinkRel,
   DirectoryLink,
@@ -191,25 +190,11 @@ export function parsePlatformPages(pages: MarkdownPage[]): PlatformMarkdown[] {
 }
 
 export async function loadPlatformPages(): Promise<PlatformMarkdown[]> {
-  const recordsDirectory = path.resolve(process.cwd(), 'docs', 'platform-records')
-  const pages = readdirSync(recordsDirectory)
-    .filter((file) => file.endsWith('.md'))
-    .map((file) => {
-      const source = readFileSync(path.join(recordsDirectory, file), 'utf8')
-      const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/)
-      if (!match) fail(file, 'frontmatter must be a JSON-compatible YAML object between --- markers')
-      let frontmatter: unknown
-      try {
-        frontmatter = JSON.parse(match[1])
-      } catch {
-        fail(file, 'frontmatter must be valid JSON-compatible YAML')
-      }
-      return {
-        url: `/platform-records/${file}`,
-        frontmatter: frontmatter as Record<string, unknown>,
-        src: source
-      }
-    })
+  const pages = readPlatformRecordSources().map(({ file, source, frontmatter }) => ({
+    url: `/platform-records/${file}`,
+    frontmatter,
+    src: source
+  }))
   return parsePlatformPages(pages)
 }
 

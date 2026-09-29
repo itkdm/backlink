@@ -1,28 +1,36 @@
 {
   "ratings": {
-    "alternativeto.net": {
-      "value": 80,
-      "checkedAt": "2026-09-26"
+    "ainexfinder.com": {
+      "value": 33,
+      "checkedAt": "2026-09-29"
     },
     "betalist.com": {
-      "value": 76,
-      "checkedAt": "2026-09-26"
+      "value": 77,
+      "checkedAt": "2026-09-29"
     },
-    "futurepedia.io": {
-      "value": 72,
-      "checkedAt": "2026-09-26"
+    "launchdaily.info": {
+      "value": 29,
+      "checkedAt": "2026-09-29"
     },
     "producthunt.com": {
       "value": 91,
-      "checkedAt": "2026-09-26"
+      "checkedAt": "2026-09-29"
     },
     "saashub.com": {
-      "value": 81,
-      "checkedAt": "2026-09-26"
+      "value": 80,
+      "checkedAt": "2026-09-29"
+    },
+    "startupfa.me": {
+      "value": 84,
+      "checkedAt": "2026-09-29"
+    },
+    "twelve.tools": {
+      "value": 83,
+      "checkedAt": "2026-09-29"
     },
     "uneed.best": {
       "value": 76,
-      "checkedAt": "2026-09-26"
+      "checkedAt": "2026-09-29"
     }
   }
 }

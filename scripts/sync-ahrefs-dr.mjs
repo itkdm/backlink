@@ -1,10 +1,12 @@
 import { readFile, rename, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { normalizePlatformDomain, readPlatformRecordSources } from '../docs/.vitepress/data/platform-record-source.mjs'
 
 const projectRoot = process.cwd()
 const envPath = resolve(projectRoot, '.env')
-const sourcePath = resolve(projectRoot, 'docs/.vitepress/data/links.ts')
 const outputPath = resolve(projectRoot, 'docs/.vitepress/data/ahrefs-dr.json')
+const endpoint = 'https://api.ahrefs.com/v3/public/domain-rating-free'
+const maxTargetsPerRequest = 1000
 
 function parseEnv(contents) {
   return Object.fromEntries(contents.split(/\r?\n/).flatMap((line) => {
@@ -12,15 +14,6 @@ function parseEnv(contents) {
     if (!match || match[1].startsWith('#')) return []
     return [[match[1], match[2].replace(/^(['"])(.*)\1$/, '$2')]]
   }))
-}
-
-function normalizeDomain(target) {
-  try {
-    const url = new URL(target.includes('://') ? target : `https://${target}`)
-    return url.hostname.toLowerCase().replace(/^www\./, '')
-  } catch {
-    return ''
-  }
 }
 
 let apiKey = process.env.AHREFS_API_KEY
@@ -34,41 +27,62 @@ if (!apiKey) {
 }
 if (!apiKey) throw new Error('AHREFS_API_KEY is missing from the environment and local .env file.')
 
-const source = await readFile(sourcePath, 'utf8')
-const targets = [...new Set([...source.matchAll(/homepageUrl\s*:\s*['"]([^'"]+)['"]/g)]
-  .map((match) => normalizeDomain(match[1]))
-  .filter(Boolean))]
-if (!targets.length) throw new Error('No homepage domains were found in links.ts.')
+const recordsDirectory = resolve(projectRoot, 'docs/platform-records')
+const records = readPlatformRecordSources(recordsDirectory)
+const targets = records.map(({ frontmatter }) => normalizePlatformDomain(frontmatter.homepageUrl))
+const checkedAt = new Date().toISOString().slice(0, 10)
+const ratings = {}
 
-const response = await fetch('https://api.ahrefs.com/v3/public/domain-rating-free', {
-  method: 'POST',
-  headers: {
-    Authorization: `Bearer ${apiKey}`,
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ targets }),
-  signal: AbortSignal.timeout(30_000)
-})
+for (let offset = 0; offset < targets.length; offset += maxTargetsPerRequest) {
+  const batch = targets.slice(offset, offset + maxTargetsPerRequest)
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ targets: batch }),
+    signal: AbortSignal.timeout(30_000)
+  })
 
-if (!response.ok) {
-  throw new Error(`Ahrefs DR request failed with HTTP ${response.status}. Check the API key and Ahrefs API availability.`)
+  if (!response.ok) {
+    throw new Error(`Ahrefs DR request failed with HTTP ${response.status}. Check the API key and Ahrefs API availability.`)
+  }
+
+  const payload = await response.json()
+  const rows = payload?.domain_rating?.targets
+  if (!Array.isArray(rows)) throw new Error('Ahrefs returned an unexpected response format.')
+
+  const batchRatings = new Map()
+  for (const row of rows) {
+    const domain = typeof row?.target === 'string' ? normalizePlatformDomain(
+      row.target.includes('://') ? row.target : `https://${row.target}`
+    ) : ''
+    const value = row?.domain_rating
+    if (!domain || !batch.includes(domain)) throw new Error('Ahrefs returned a target that was not requested.')
+    if (typeof value !== 'number' || !Number.isFinite(value) || value < 0 || value > 100) {
+      throw new Error(`Ahrefs returned an invalid DR value for ${domain}.`)
+    }
+    if (batchRatings.has(domain)) throw new Error(`Ahrefs returned duplicate results for ${domain}.`)
+    batchRatings.set(domain, value)
+  }
+
+  const missing = batch.filter((domain) => !batchRatings.has(domain))
+  if (missing.length) throw new Error(`Ahrefs response omitted requested domains: ${missing.join(', ')}.`)
+
+  for (const [domain, value] of batchRatings) ratings[domain] = { value, checkedAt }
 }
 
-const payload = await response.json()
-const rows = payload?.domain_rating?.targets
-if (!Array.isArray(rows)) throw new Error('Ahrefs returned an unexpected response format.')
-
-const checkedAt = new Date().toISOString().slice(0, 10)
-const ratings = Object.fromEntries(rows.flatMap((row) => {
-  const domain = normalizeDomain(row.target)
-  const value = Number(row.domain_rating)
-  if (!domain || !Number.isFinite(value)) return []
-  return [[domain, { value, checkedAt }]]
-}).sort(([domainA], [domainB]) => domainA.localeCompare(domainB)))
+const orderedRatings = Object.fromEntries(Object.entries(ratings).sort(([domainA], [domainB]) => domainA.localeCompare(domainB)))
 
 const tempPath = `${outputPath}.tmp`
-await writeFile(tempPath, `${JSON.stringify({ ratings }, null, 2)}\n`, 'utf8')
-await rename(tempPath, outputPath)
+try {
+  await writeFile(tempPath, `${JSON.stringify({ ratings: orderedRatings }, null, 2)}\n`, 'utf8')
+  await rename(tempPath, outputPath)
+} catch (error) {
+  await import('node:fs/promises').then(({ rm }) => rm(tempPath, { force: true }))
+  throw error
+}
 
-console.log(`Updated Ahrefs Domain Rating for ${Object.keys(ratings).length} of ${targets.length} domains (${checkedAt}).`)
+console.log(`Updated Ahrefs Domain Rating for ${Object.keys(orderedRatings).length} platform domains (${checkedAt}).`)
