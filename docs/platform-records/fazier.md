@@ -27,7 +27,7 @@
   "backlinkRel": "unknown",
   "listingIndexability": "unknown",
   "availability": "open",
-  "verifiedAt": "2026-10-02"
+  "verifiedAt": "2026-10-04"
 }
 ---
 

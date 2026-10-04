@@ -1,52 +1,60 @@
 {
   "ratings": {
+    "aidirs.org": {
+      "value": 65,
+      "checkedAt": "2026-10-04"
+    },
     "ainexfinder.com": {
       "value": 33,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     },
     "backlinkdirs.com": {
       "value": 51,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     },
     "betalist.com": {
-      "value": 77,
-      "checkedAt": "2026-10-01"
+      "value": 76,
+      "checkedAt": "2026-10-04"
     },
     "fazier.com": {
       "value": 83,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
+    },
+    "indie.deals": {
+      "value": 61,
+      "checkedAt": "2026-10-04"
     },
     "launchdaily.info": {
       "value": 29,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     },
     "news.ycombinator.com": {
       "value": 91,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     },
     "producthunt.com": {
       "value": 91,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     },
     "saashub.com": {
       "value": 80,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     },
     "startupfa.me": {
       "value": 84,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     },
     "turbo0.com": {
       "value": 81,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     },
     "twelve.tools": {
       "value": 83,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     },
     "uneed.best": {
       "value": 76,
-      "checkedAt": "2026-10-01"
+      "checkedAt": "2026-10-04"
     }
   }
 }
